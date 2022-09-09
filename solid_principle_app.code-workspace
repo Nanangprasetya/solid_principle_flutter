@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "packages/solid_data_api"
+		},
+		{
+			"path": "packages/solid_data_local"
+		},
+		{
+			"path": "packages/solid_domain"
+		}
+	],
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"hzgood.dart-data-class-generator"
+		]
+	}
+}

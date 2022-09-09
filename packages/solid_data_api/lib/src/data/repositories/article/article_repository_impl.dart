@@ -58,7 +58,7 @@ class ArticleRepositoryImpl extends ArticleRepository {
   @override
   Future<Either<Failure, bool>> deleteArticle(ArticleDeleteEntity params) async {
     try {
-      bool data = await articleRemoteDatasource.delteArticle(params);
+      bool data = await articleRemoteDatasource.deleteArticle(params);
 
       return Right(data);
     } catch (e) {

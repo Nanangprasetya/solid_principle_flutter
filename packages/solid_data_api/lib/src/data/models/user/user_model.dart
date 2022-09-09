@@ -1,3 +1,4 @@
+import 'package:solid_data_api/src/data/models/user/user_address_model.dart';
 import 'package:solid_domain/solid_domain.dart';
 
 class UserModel extends UserEntity {
@@ -7,6 +8,7 @@ class UserModel extends UserEntity {
   final String email;
   final String phone;
   final String website;
+  final UserAddressModel address;
 
   UserModel({
     required this.id,
@@ -15,14 +17,16 @@ class UserModel extends UserEntity {
     required this.email,
     required this.phone,
     required this.website,
+    required this.address,
   }) : super(
-          id: id,
-          name: name,
-          username: username,
-          email: email,
-          phone: phone,
-          website: website,
-        );
+            id: id,
+            name: name,
+            username: username,
+            email: email,
+            phone: phone,
+            website: website,
+            address: address,
+          );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -31,7 +35,8 @@ class UserModel extends UserEntity {
       username: json['username'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
-      website: json['website'] as String,
+      website: json['website'] as String, 
+      address: UserAddressModel.fromJson(json['address']),
     );
   }
 }

@@ -9,7 +9,7 @@ abstract class ArticleRemoteDatasource {
   Future<List<ArticleEntity>> getArticleData(ArticleParamsEntity params);
   Future<ArticleEntity> postAticle(ArticlePostEntity params);
   Future<ArticleEntity> putArticle(ArticlePutEntity params);
-  Future<bool> delteArticle(ArticleDeleteEntity params);
+  Future<bool> deleteArticle(ArticleDeleteEntity params);
 }
 
 @lazySingleton
@@ -37,7 +37,7 @@ class ArticleRemoteDatasourceImpl extends ArticleRemoteDatasource {
   }
   
   @override
-  Future<bool> delteArticle(ArticleDeleteEntity params) async {
+  Future<bool> deleteArticle(ArticleDeleteEntity params) async {
     await baseApi.delete('post/${params.id}');
     return true;
   }
