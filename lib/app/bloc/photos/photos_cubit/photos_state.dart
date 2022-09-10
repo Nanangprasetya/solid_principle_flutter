@@ -1,29 +1,30 @@
-part of 'user_cubit.dart';
+part of 'photos_cubit.dart';
 
-abstract class UserState extends Equatable {
+
+abstract class PhotosState extends Equatable {
   final String? message;
   final bool hasMax;
 
-  UserState(this.message, this.hasMax);
+  PhotosState(this.message, this.hasMax);
 
   @override
   List<Object?> get props => [message];
 }
 
-class UserInitial extends UserState {
-  UserInitial() : super(null, false);
+class PhotosInitial extends PhotosState {
+  PhotosInitial() : super(null, false);
 }
 
-class UserLoading extends UserState {
-  UserLoading() : super(null, false);
+class PhotosLoading extends PhotosState {
+  PhotosLoading() : super(null, false);
 }
 
-class UserLoaded extends UserState {
-  final List<UserEntity> data;
+class PhotosLoaded extends PhotosState {
+  final List<PhotosEntity> data;
   final bool hasMax;
   final String? message;
 
-  UserLoaded({
+  PhotosLoaded({
     required this.data,
     required this.hasMax,
     this.message,
@@ -33,10 +34,10 @@ class UserLoaded extends UserState {
   List<Object?> get props => [data, hasMax, message];
 }
 
-class UserNotLoaded extends UserState {
+class PhotosNotLoaded extends PhotosState {
   final String message;
 
-  UserNotLoaded({
+  PhotosNotLoaded({
     required this.message,
   }) : super(message, false);
 

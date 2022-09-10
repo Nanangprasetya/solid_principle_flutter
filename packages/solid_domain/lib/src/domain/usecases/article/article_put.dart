@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:solid_domain/solid_domain.dart';
-import 'package:solid_domain/src/domain/entities/article/article_put_entity.dart';
 
 @lazySingleton
 class ArticlePut extends UseCase<ArticleEntity, ArticlePutEntity> {

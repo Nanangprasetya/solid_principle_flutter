@@ -6,38 +6,48 @@ import 'package:solid_principle_app/app/bloc/blocs.dart';
 import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
 import 'package:solid_principle_app/core/themes/colors.dart';
 import 'package:solid_principle_app/core/utils/dimens.dart';
+import 'package:solid_principle_app/core/utils/utilis.dart';
 
-class UserPage extends StatefulWidget {
-  UserPage({Key? key}) : super(key: key);
+class ArticlePage extends StatefulWidget {
+  ArticlePage({Key? key}) : super(key: key);
 
   @override
-  State<UserPage> createState() => UserPageState();
+  State<ArticlePage> createState() => _ArticlePageState();
 }
 
-class UserPageState extends State<UserPage> {
+class _ArticlePageState extends State<ArticlePage> {
+  late ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() => AppUtils.infinityBottom(_scrollController));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
+    return BlocConsumer<ArticleCubit, ArticleState>(
       listener: (context, state) {
         if (state.message != null) {
           Fluttertoast.showToast(msg: state.message!, toastLength: Toast.LENGTH_SHORT);
         }
       },
       builder: (context, state) {
-        if (state is UserLoaded) {
+        if (state is ArticleLoaded) {
           return ListView.separated(
+            controller: _scrollController,
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            itemCount: 5,
+            itemCount: state.hasMax ? state.data.length : state.data.length + 1,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
-                leading: Text('$index'),
-                title: Text('title'),
-                subtitle: Text('subtitle'),
+                leading: Text('${state.data[index].userId}'),
+                title: Text(state.data[index].title),
+                subtitle: Text(state.data[index].body),
               );
             },
             separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
           );
-        } else if (state is UserNotLoaded) {
+        } else if (state is ArticleNotLoaded) {
           return Padding(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             child: Center(

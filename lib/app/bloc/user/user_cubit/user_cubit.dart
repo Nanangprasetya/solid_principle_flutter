@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:solid_domain/solid_domain.dart';
 
@@ -13,7 +12,7 @@ class UserCubit extends Cubit<UserState> {
 
   UserCubit(this.userGetData) : super(UserInitial());
 
-  void getAllUsers() async {
+  void getAllData() async {
     if (state.hasMax) return;
 
     if (state is UserInitial) emit(UserLoading());
@@ -23,8 +22,8 @@ class UserCubit extends Cubit<UserState> {
     Either<Failure, List<UserEntity>> data = await userGetData.call(UserParamsEntity());
 
     data.fold(
-      (failure) => UserNotLoaded(message: failure.message!),
-      (value) => UserLoaded(data: [...(state as UserLoaded).data, ...value], hasMax: value.isEmpty),
+      (failure) => emit(UserNotLoaded(message: failure.message!)),
+      (value) => emit(UserLoaded(data: [...(state as UserLoaded).data, ...value], hasMax: value.isEmpty)),
     );
   }
 
@@ -32,8 +31,8 @@ class UserCubit extends Cubit<UserState> {
     Either<Failure, List<UserEntity>> data = await userGetData.call(UserParamsEntity());
 
     data.fold(
-      (failure) => UserNotLoaded(message: failure.message!),
-      (value) => UserLoaded(data: value, hasMax: false),
+      (failure) => emit(UserNotLoaded(message: failure.message!)),
+      (value) => emit(UserLoaded(data: value, hasMax: false)),
     );
   }
 }

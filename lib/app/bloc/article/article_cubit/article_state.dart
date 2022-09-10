@@ -1,29 +1,29 @@
-part of 'user_cubit.dart';
+part of 'article_cubit.dart';
 
-abstract class UserState extends Equatable {
+abstract class ArticleState extends Equatable {
   final String? message;
   final bool hasMax;
 
-  UserState(this.message, this.hasMax);
+  ArticleState(this.message, this.hasMax);
 
   @override
   List<Object?> get props => [message];
 }
 
-class UserInitial extends UserState {
-  UserInitial() : super(null, false);
+class ArticleInitial extends ArticleState {
+  ArticleInitial() : super(null, false);
 }
 
-class UserLoading extends UserState {
-  UserLoading() : super(null, false);
+class ArticleLoading extends ArticleState {
+  ArticleLoading() : super(null, false);
 }
 
-class UserLoaded extends UserState {
-  final List<UserEntity> data;
+class ArticleLoaded extends ArticleState {
+  final List<ArticleEntity> data;
   final bool hasMax;
   final String? message;
 
-  UserLoaded({
+  ArticleLoaded({
     required this.data,
     required this.hasMax,
     this.message,
@@ -33,10 +33,10 @@ class UserLoaded extends UserState {
   List<Object?> get props => [data, hasMax, message];
 }
 
-class UserNotLoaded extends UserState {
+class ArticleNotLoaded extends ArticleState {
   final String message;
 
-  UserNotLoaded({
+  ArticleNotLoaded({
     required this.message,
   }) : super(message, false);
 

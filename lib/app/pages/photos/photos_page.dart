@@ -7,24 +7,24 @@ import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
 import 'package:solid_principle_app/core/themes/colors.dart';
 import 'package:solid_principle_app/core/utils/dimens.dart';
 
-class UserPage extends StatefulWidget {
-  UserPage({Key? key}) : super(key: key);
+class PhotosPage extends StatefulWidget {
+  PhotosPage({Key? key}) : super(key: key);
 
   @override
-  State<UserPage> createState() => UserPageState();
+  State<PhotosPage> createState() => _PhotosPageState();
 }
 
-class UserPageState extends State<UserPage> {
+class _PhotosPageState extends State<PhotosPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
+    return BlocConsumer<PhotosCubit, PhotosState>(
       listener: (context, state) {
         if (state.message != null) {
           Fluttertoast.showToast(msg: state.message!, toastLength: Toast.LENGTH_SHORT);
         }
       },
       builder: (context, state) {
-        if (state is UserLoaded) {
+        if (state is PhotosLoaded) {
           return ListView.separated(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             itemCount: 5,
@@ -37,7 +37,7 @@ class UserPageState extends State<UserPage> {
             },
             separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
           );
-        } else if (state is UserNotLoaded) {
+        } else if (state is PhotosNotLoaded) {
           return Padding(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             child: Center(
