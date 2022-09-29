@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
-import 'package:solid_domain/solid_domain.dart';
+import 'package:solid_principle_app/core/failures/failure.dart';
+
+import '../../../../domain/domain.dart';
 
 part 'photos_state.dart';
 
-@injectable
 class PhotosCubit extends Cubit<PhotosState> {
   final PhotosGetData photosGetData;
 

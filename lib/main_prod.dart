@@ -1,9 +1,9 @@
-import 'package:solid_domain/solid_domain.dart';
 import 'package:solid_principle_app/main.dart';
+import 'core/config/flavor.dart';
 
 void main() {
   mainCommon(
-    FlavorConfig(
+    FlavorConfig.init(
       env: Env.PRODUCTION,
       values: EnvValues(
         appVersion: '0.0.1',
@@ -12,6 +12,6 @@ void main() {
         delay: 0,
         printResponse: false,
       ),
-    ),
+    )
   );
 }

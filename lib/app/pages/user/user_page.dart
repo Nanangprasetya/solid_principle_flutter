@@ -4,8 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:solid_principle_app/app/bloc/blocs.dart';
 import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
-import 'package:solid_principle_app/core/themes/colors.dart';
-import 'package:solid_principle_app/core/utils/dimens.dart';
+import 'package:solid_principle_app/core/utils/dimens_util.dart';
+import 'package:solid_principle_app/themes/themes/themes.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key? key}) : super(key: key);

@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
-import 'package:solid_domain/solid_domain.dart';
+import '../../../../core/failures/failure.dart';
+import '../../../../domain/domain.dart';
 
 part 'article_state.dart';
 
-@injectable
 class ArticleCubit extends Cubit<ArticleState> {
   final ArticleGetData articleGetData;
 

@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
-import 'package:solid_data_api/solid_data_api.dart';
-import 'package:solid_domain/solid_domain.dart';
-
-import 'app/injector/injector.dart';
+import 'package:solid_principle_app/injection.dart';
 import 'app/pages/main/main_page.dart';
-import 'core/themes/colors.dart';
+import 'core/config/flavor.dart';
+import 'themes/themes/colors.dart';
 
-final sl = GetIt.instance;
-
-void mainCommon(FlavorConfig env) {
+void mainCommon(FlavorConfig flavor) {
   WidgetsFlutterBinding.ensureInitialized();
-
-  configureDependencies(sl);
-  SolidDomain.init(sl);
-  SolidDataApi.init(env: env, getIt: sl);
+  initLocator(flavor);
 
   runApp(const Apps());
 }
