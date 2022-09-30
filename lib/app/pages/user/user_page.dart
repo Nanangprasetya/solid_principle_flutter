@@ -9,16 +9,19 @@ import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
 
 class UserPage extends StatefulWidget {
-  final RefreshController controller;
-
-  const UserPage({super.key, required this.controller});
+  final PageStorageBucket bucket;
+  
+  const UserPage({Key? key, required this.bucket}) : super(key: key);
 
   @override
   State<UserPage> createState() => UserPageState();
 }
 
 class UserPageState extends State<UserPage> {
-  late ScrollController _scrollController = ScrollController();
+  late RefreshController _refreshController = RefreshController();
+  late ScrollController _scrollController = ScrollController(
+    initialScrollOffset: widget.bucket.currentPageScrollOffset(context, KEY_USERS),
+  );
 
   @override
   void initState() {
@@ -39,24 +42,27 @@ class UserPageState extends State<UserPage> {
       },
       builder: (context, state) {
         if (state is UserLoaded) {
-          return SmartRefresher(
-            controller: widget.controller,
-            onRefresh: () {
-              context.read<UserCubit>().refreshUsers();
-              widget.controller.refreshCompleted();
-            },
-            child: ListView.separated(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(AppDimens.radiusMedium),
-              itemCount: state.hasMax ? state.data.length : state.data.length + 1,
-              itemBuilder: (_, index) => index >= state.data.length
-                  ? const BottomLoader()
-                  : ListTile(
-                      leading: Text('${state.data[index].id}'),
-                      title: Text(state.data[index].name),
-                      subtitle: Text(state.data[index].phone)
-                    ),
-              separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
+          return NotificationListener<ScrollNotification>(
+            onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_USERS),
+            child: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: () {
+                context.read<UserCubit>().refreshUsers();
+                _refreshController.refreshCompleted();
+              },
+              child: ListView.separated(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(AppDimens.radiusMedium),
+                itemCount: state.hasMax ? state.data.length : state.data.length + 1,
+                itemBuilder: (_, index) => index >= state.data.length
+                    ? const BottomLoader()
+                    : ListTile(
+                        leading: Text('${state.data[index].id}'),
+                        title: Text(state.data[index].name),
+                        subtitle: Text(state.data[index].phone),
+                      ),
+                separatorBuilder: (_, index) => Divider(),
+              ),
             ),
           );
         } else if (state is UserNotLoaded) {
@@ -71,7 +77,7 @@ class UserPageState extends State<UserPage> {
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) => ShimmerCustom(
-              height: AppDimens.heightListTile,
+              height: AppDimens.sizeLargeX,
               width: Get.width,
             ),
             separatorBuilder: (_, index) => SizedBox(height: AppDimens.marginPaddingSmall),

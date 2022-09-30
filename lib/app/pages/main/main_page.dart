@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:solid_principle_app/app/pages/article/article_page.dart';
 import 'package:solid_principle_app/app/pages/photos/photos_page.dart';
 import 'package:solid_principle_app/app/pages/user/user_page.dart';
 import 'package:solid_principle_app/app/widgets/global/scaffold_responsive.dart';
 import 'package:solid_principle_app/injection.dart';
 import '../../bloc/blocs.dart';
-import 'component/drawer_page.dart';
+import 'component/drawer_cmp.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
@@ -19,6 +18,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selected = 0;
   late PageController _pageController = PageController();
+  late PageStorageBucket _bucketArticle = PageStorageBucket();
+  late PageStorageBucket _bucketPhotos = PageStorageBucket();
+  late PageStorageBucket _bucketUsers = PageStorageBucket();
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +47,13 @@ class _MainPageState extends State<MainPage> {
         padding: const EdgeInsets.all(8.0),
         child: FlutterLogo(),
       ),
-      drawer: DrawerPage(
-          selected: _selected,
-          onChange: (int i) {
-            setState(() => _selected = i);
-            _pageController.jumpToPage(i);
-          }),
+      drawer: DrawerCmp(
+        selected: _selected,
+        onChange: (int i) {
+          setState(() => _selected = i);
+          _pageController.jumpToPage(i);
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selected,
         onTap: (int i) {
@@ -80,9 +83,9 @@ class _MainPageState extends State<MainPage> {
         physics: NeverScrollableScrollPhysics(),
         onPageChanged: (int i) => setState(() => _selected = i),
         children: [
-          ArticlePage(controller: RefreshController()),
-          PhotosPage(controller: RefreshController()),
-          UserPage(controller: RefreshController()),
+          ArticlePage(bucket: _bucketArticle),
+          PhotosPage(bucket: _bucketPhotos),
+          UserPage(bucket: _bucketUsers),
         ],
       ),
     );

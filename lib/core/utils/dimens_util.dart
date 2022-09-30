@@ -18,4 +18,29 @@ class AppDimens {
   static const double savingBalanceCard = 70.0;
   static const double infinityHeight = 50;
   static const double heightListTile = 40.0;
+  
+  /// 68
+  static double sizeLargeXX = 68; 
+  /// 56
+  static double sizeLargeX = 56; 
+  /// 40
+  static double sizeLarge = 40; 
+  /// 36
+  static double sizeMediumXX = 36; 
+  /// 24
+  static double sizeMediumX = 24; 
+  /// 20
+  static double sizeMedium = 20; 
+  /// 16
+  static double sizeNormalX = 16; 
+  /// 10
+  static double sizeNormal = 10; 
+  /// 8
+  static double sizeSmallXX = 8; 
+  /// 6
+  static double sizeSmallX = 6; 
+  /// 4
+  static double sizeSmall = 4; 
+  /// 2
+  static double sizeVerySmall = 2; 
 }

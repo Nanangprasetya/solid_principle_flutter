@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../../core/core.dart';
 
-class DrawerPage extends StatelessWidget {
+class DrawerCmp extends StatelessWidget {
   final int selected;
   final Function(int i) onChange;
 
-  const DrawerPage({super.key, required this.onChange, required this.selected});
+  const DrawerCmp({super.key, required this.onChange, required this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class DrawerPage extends StatelessWidget {
       elevation: 1,
       child: ListView(
         children: [
-          DrawerHeader(
+          DrawerHeader( 
             child: FlutterLogo(),
           ),
           DrawerListTile(

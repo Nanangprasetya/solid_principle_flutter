@@ -64,16 +64,16 @@ android {
     flavorDimensions "app"
     
     productFlavors {
-        prod {
+        production {
             dimension "app"
             applicationId "com.example.solid_principle_app"
             versionCode flutterVersionCode.toInteger()
             versionName flutterVersionName
         }
 
-        dev {
+        development {
             dimension "app"
-            applicationId "com.solid_principle_app.solid_principle_app.dev"
+            applicationId "com.biscuit.solid_principle_app"
             versionCode flutterVersionCode.toInteger()
             versionName flutterVersionName
         }

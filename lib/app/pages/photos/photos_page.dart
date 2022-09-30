@@ -7,18 +7,23 @@ import 'package:solid_principle_app/app/widgets/global/bottom_loader.dart';
 import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
 import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
+import 'component/photo_content_cmp.dart';
 
 class PhotosPage extends StatefulWidget {
-  final RefreshController controller;
+  final PageStorageBucket bucket;
 
-  const PhotosPage({super.key, required this.controller});
+  const PhotosPage({Key? key, required this.bucket}) : super(key: key);
 
   @override
   State<PhotosPage> createState() => _PhotosPageState();
 }
 
 class _PhotosPageState extends State<PhotosPage> {
-  late ScrollController _scrollController = ScrollController();
+  late RefreshController _refreshController = RefreshController();
+  late ScrollController _scrollController = ScrollController(
+    initialScrollOffset: widget.bucket.currentPageScrollOffset(context, KEY_PHOTOS),
+  );
+
 
   @override
   void initState() {
@@ -39,24 +44,25 @@ class _PhotosPageState extends State<PhotosPage> {
       },
       builder: (context, state) {
         if (state is PhotosLoaded) {
-          return SmartRefresher(
-            controller: widget.controller,
-            onRefresh: () {
-              context.read<PhotosCubit>().refreshPhotoss();
-              widget.controller.refreshCompleted();
-            },
-            child: ListView.separated(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(AppDimens.radiusMedium),
-              itemCount: state.hasMax ? state.data.length : state.data.length + 1,
-              itemBuilder: (_, index) => index >= state.data.length
-                  ? const BottomLoader()
-                  : ListTile(
-                      leading: CircleAvatar(child: Image.network(state.data[index].thumbnailUrl)),
-                      title: Text(state.data[index].title),
-                      subtitle: Text(state.data[index].url),
-                    ),
-              separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
+          return NotificationListener<ScrollNotification>(
+            onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_PHOTOS),
+            child: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: () {
+                context.read<PhotosCubit>().refreshPhotoss();
+                _refreshController.refreshCompleted();
+              },
+              child: ListView.separated(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(AppDimens.radiusMedium),
+                itemCount: state.hasMax ? state.data.length : state.data.length + 1,
+                itemBuilder: (_, index) => index >= state.data.length
+                    ? const BottomLoader()
+                    : PhotoContentCmp(
+                        data: state.data[index],
+                      ),
+                separatorBuilder: (_, index) => Divider(),
+              ),
             ),
           );
         } else if (state is PhotosNotLoaded) {
@@ -71,7 +77,7 @@ class _PhotosPageState extends State<PhotosPage> {
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) => ShimmerCustom(
-              height: AppDimens.heightListTile,
+              height: AppDimens.sizeLargeX,
               width: Get.width,
             ),
             separatorBuilder: (_, index) => SizedBox(height: AppDimens.marginPaddingSmall),

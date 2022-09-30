@@ -9,20 +9,24 @@ import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
 
 class ArticlePage extends StatefulWidget {
-  final RefreshController controller;
+  final PageStorageBucket bucket;
 
-  const ArticlePage({super.key, required this.controller});
+  const ArticlePage({Key? key, required this.bucket}) : super(key: key);
 
   @override
   State<ArticlePage> createState() => _ArticlePageState();
 }
 
 class _ArticlePageState extends State<ArticlePage> {
-  late ScrollController _scrollController = ScrollController();
+  late RefreshController _refreshController = RefreshController();
+  late ScrollController _scrollController = ScrollController(
+    initialScrollOffset: widget.bucket.currentPageScrollOffset(context, KEY_ARTICLE),
+  );
 
   @override
   void initState() {
     super.initState();
+    
     _scrollController.addListener(() {
       if (_scrollController.infinityBottom()) context.read<ArticleCubit>().getAllData();
     });
@@ -38,37 +42,47 @@ class _ArticlePageState extends State<ArticlePage> {
       },
       builder: (context, state) {
         if (state is ArticleLoaded) {
-          return SmartRefresher(
-            controller: widget.controller,
-            onRefresh: () {
-              context.read<ArticleCubit>().refreshArticles();
-              widget.controller.refreshCompleted();
-            },
-            child: ListView.separated(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(AppDimens.radiusMedium),
-              itemCount: state.hasMax ? state.data.length : state.data.length + 1,
-              itemBuilder: (_, index) => index >= state.data.length
-                  ? const BottomLoader()
-                  : ListTile(
-                      leading: Text('${state.data[index].id}'),
-                      title: Text(state.data[index].title),
-                      subtitle: Text(state.data[index].body),
-                    ),
-              separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
+          return NotificationListener<ScrollNotification>(
+            onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_ARTICLE),
+            child: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: () {
+                context.read<ArticleCubit>().refreshArticles();
+                _refreshController.refreshCompleted();
+              },
+              child: ListView.separated(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(AppDimens.radiusMedium),
+                itemCount: state.hasMax ? state.data.length : state.data.length + 1,
+                itemBuilder: (_, index) => index >= state.data.length
+                    ? const BottomLoader()
+                    : ListTile(
+                        leading: Text('${state.data[index].id}'),
+                        title: Text(state.data[index].title),
+                        subtitle: Text(state.data[index].body),
+                      ),
+                separatorBuilder: (_, index) => Divider(),
+              ),
             ),
           );
         } else if (state is ArticleNotLoaded) {
-          return Padding(
-            padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            child: Center(child: Text(state.message)),
+          return SmartRefresher(
+            controller: _refreshController,
+            onRefresh: () {
+              context.read<ArticleCubit>().refreshArticles();
+              _refreshController.refreshCompleted();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(AppDimens.radiusMedium),
+              child: Center(child: Text(state.message)),
+            ),
           );
         } else {
           return ListView.separated(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             itemCount: 5,
             itemBuilder: (_, index) => ShimmerCustom(
-              height: AppDimens.heightListTile,
+              height: AppDimens.sizeLargeX,
               width: Get.width,
             ),
             separatorBuilder: (_, index) => SizedBox(height: AppDimens.marginPaddingSmall),

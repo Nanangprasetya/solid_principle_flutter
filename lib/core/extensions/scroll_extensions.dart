@@ -9,3 +9,12 @@ extension ScrollExtension on ScrollController {
     return currentScroll == maxScroll;
   }
 }
+
+extension ScrollOffset on PageStorageBucket {
+  bool saveScrollOffset(BuildContext context, {required ScrollNotification pos, required String key}) {
+    this.writeState(context, pos.metrics.pixels, identifier: key);
+    return true;
+  }
+
+  double currentPageScrollOffset(BuildContext context, String key) => this.readState(context, identifier: key) ?? 0.0;
+}
