@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solid_principle_app/themes/themes/colors.dart';
+import '../../../../core/core.dart';
 
 class DrawerPage extends StatelessWidget {
   final int selected;

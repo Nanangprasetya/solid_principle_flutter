@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:solid_principle_app/app/pages/article/article_page.dart';
 import 'package:solid_principle_app/app/pages/photos/photos_page.dart';
 import 'package:solid_principle_app/app/pages/user/user_page.dart';
@@ -79,9 +80,9 @@ class _MainPageState extends State<MainPage> {
         physics: NeverScrollableScrollPhysics(),
         onPageChanged: (int i) => setState(() => _selected = i),
         children: [
-          ArticlePage(),
-          PhotosPage(),
-          UserPage(),
+          ArticlePage(controller: RefreshController()),
+          PhotosPage(controller: RefreshController()),
+          UserPage(controller: RefreshController()),
         ],
       ),
     );

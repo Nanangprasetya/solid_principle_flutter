@@ -6,7 +6,7 @@ class ArticleParamsEntity extends Equatable {
 
   const ArticleParamsEntity({
     this.start = 0,
-    this.limit = 20,
+    this.limit = 10,
   });
 
   @override

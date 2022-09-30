@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../core/failures/failure.dart';
+import '../../../../core/core.dart';
 import '../../../../domain/domain.dart';
 
 part 'article_state.dart';
@@ -18,11 +18,16 @@ class ArticleCubit extends Cubit<ArticleState> {
 
     if (state is ArticleLoading) return refreshArticles();
 
-    Either<Failure, List<ArticleEntity>> data = await articleGetData.call(ArticleParamsEntity());
+    Either<Failure, List<ArticleEntity>> data = await articleGetData.call(ArticleParamsEntity(
+      start: (state as ArticleLoaded).data.length,
+    ));
 
     data.fold(
       (failure) => emit(ArticleNotLoaded(message: failure.message!)),
-      (value) => emit(ArticleLoaded(data: [...(state as ArticleLoaded).data, ...value], hasMax: value.isEmpty)),
+      (value) => emit(ArticleLoaded(
+        data: [...(state as ArticleLoaded).data, ...value],
+        hasMax: value.isEmpty,
+      )),
     );
   }
 

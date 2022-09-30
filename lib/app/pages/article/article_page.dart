@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:solid_principle_app/app/bloc/blocs.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:solid_principle_app/app/widgets/global/bottom_loader.dart';
 import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
-import 'package:solid_principle_app/core/utils/dimens_util.dart';
-import 'package:solid_principle_app/core/utils/app_util.dart';
-import 'package:solid_principle_app/themes/themes/themes.dart';
+import '../../../core/core.dart';
+import '../../bloc/blocs.dart';
 
 class ArticlePage extends StatefulWidget {
-  ArticlePage({Key? key}) : super(key: key);
+  final RefreshController controller;
+
+  const ArticlePage({super.key, required this.controller});
 
   @override
   State<ArticlePage> createState() => _ArticlePageState();
@@ -21,7 +23,9 @@ class _ArticlePageState extends State<ArticlePage> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() => AppUtils.infinityBottom(_scrollController));
+    _scrollController.addListener(() {
+      if (_scrollController.infinityBottom()) context.read<ArticleCubit>().getAllData();
+    });
   }
 
   @override
@@ -34,31 +38,36 @@ class _ArticlePageState extends State<ArticlePage> {
       },
       builder: (context, state) {
         if (state is ArticleLoaded) {
-          return ListView.separated(
-            controller: _scrollController,
-            padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            itemCount: state.hasMax ? state.data.length : state.data.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Text('${state.data[index].userId}'),
-                title: Text(state.data[index].title),
-                subtitle: Text(state.data[index].body),
-              );
+          return SmartRefresher(
+            controller: widget.controller,
+            onRefresh: () {
+              context.read<ArticleCubit>().refreshArticles();
+              widget.controller.refreshCompleted();
             },
-            separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
+            child: ListView.separated(
+              controller: _scrollController,
+              padding: const EdgeInsets.all(AppDimens.radiusMedium),
+              itemCount: state.hasMax ? state.data.length : state.data.length + 1,
+              itemBuilder: (_, index) => index >= state.data.length
+                  ? const BottomLoader()
+                  : ListTile(
+                      leading: Text('${state.data[index].id}'),
+                      title: Text(state.data[index].title),
+                      subtitle: Text(state.data[index].body),
+                    ),
+              separatorBuilder: (_, index) => Divider(color: AppColors.lightGrey),
+            ),
           );
         } else if (state is ArticleNotLoaded) {
           return Padding(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            child: Center(
-              child: Text(state.message),
-            ),
+            child: Center(child: Text(state.message)),
           );
         } else {
           return ListView.separated(
             padding: const EdgeInsets.all(AppDimens.radiusMedium),
             itemCount: 5,
-            itemBuilder: (BuildContext context, int index) => ShimmerCustom(
+            itemBuilder: (_, index) => ShimmerCustom(
               height: AppDimens.heightListTile,
               width: Get.width,
             ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:solid_principle_app/core/utils/dimens_util.dart';
-import 'package:solid_principle_app/themes/themes/themes.dart';
-
+import '../../../core/core.dart';
 class TextFieldBasic extends StatelessWidget {
   final TextEditingController controller;
   final String title;

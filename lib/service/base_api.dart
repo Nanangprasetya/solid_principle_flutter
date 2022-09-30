@@ -13,7 +13,6 @@ class BaseApi {
 
   static BaseOptions options = BaseOptions(
     baseUrl: FlavorConfig.instance.values!.baseApi!,
-    headers: {Headers.jsonContentType : 'application/json; charset=UTF-8'},
     receiveTimeout: FlavorConfig.instance.values!.delay,
     connectTimeout: FlavorConfig.instance.values!.delay,
     sendTimeout: FlavorConfig.instance.values!.delay,

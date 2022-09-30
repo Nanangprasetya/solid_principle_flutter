@@ -35,9 +35,9 @@ Future<void> initLocator(FlavorConfig flavor) async {
   ///////////////
   // Article
   sl.registerLazySingleton(() => ArticleGetData(sl()));
-  sl.registerLazySingleton(() => ArticlePost(sl()));
-  sl.registerLazySingleton(() => ArticlePut(sl()));
-  sl.registerLazySingleton(() => ArticleDelete(sl()));
+  sl.registerLazySingleton(() => ArticlePostData(sl()));
+  sl.registerLazySingleton(() => ArticlePutData(sl()));
+  sl.registerLazySingleton(() => ArticleDeleteData(sl()));
   // Photos
   sl.registerLazySingleton(() => PhotosGetData(sl()));
   // User

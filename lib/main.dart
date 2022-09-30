@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:solid_principle_app/injection.dart';
 import 'app/pages/main/main_page.dart';
-import 'core/config/flavor.dart';
-import 'themes/themes/colors.dart';
+import 'core/core.dart';
 
 void mainCommon(FlavorConfig flavor) {
   WidgetsFlutterBinding.ensureInitialized();
