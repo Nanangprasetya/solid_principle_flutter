@@ -19,6 +19,8 @@ class AppDimens {
   static const double infinityHeight = 50;
   static const double heightListTile = 40.0;
   
+  /// 120
+  static double sizeLong = 120; 
   /// 68
   static double sizeLargeXX = 68; 
   /// 56

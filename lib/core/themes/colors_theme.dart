@@ -2,26 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:supercharged/supercharged.dart';
 
 class AppColors  {
-  static Color get primary => Color(0xFFF48024);
-  static Color get secondary => Color(0xFF1B75BB);
-  static Color get background => '#F3F7FD'.toColor();
-  static Color get green => '#3AA623'.toColor();
-  static Color get lightGreen => '#D4FFE6'.toColor();
-  static Color get lightGreen2 => '#EDFFF4'.toColor();
-  static Color get red => '#FB4241'.toColor();
-  static Color get pink => '#FFD5D8'.toColor();
-  static Color get yellow => '#FEC000'.toColor();
-  static Color get lightOrange => '#FFEAD8'.toColor();
-  static Color get lightOrange2 => '#FF9F53'.toColor();
-  static Color get blue => '#1A7DFE'.toColor();
-  static Color get lightBlue => '#D9EFFF'.toColor();
-  static Color get lightBlue2 => '#F3F7FD'.toColor();
-  static Color get blackText => Colors.black87;
-  static Color get greyText => Colors.grey.shade700;
-  static Color get darkGrey => Colors.grey.shade600;
-  static Color get grey => Colors.grey;
-  static Color get shadowGrey => Colors.grey.shade300;
-  static Color get lightGrey => Colors.grey.shade200;
-  static Color get white => Colors.white;
-  static Color get blackButton => '#1F232E'.toColor();
+  AppColors._();
+
+  static Color primary = Color(0xFFF48024);
+  static Color secondary = Color(0xFF1B75BB);
+  static Color background = '#F3F7FD'.toColor();
+  static Color green = '#3AA623'.toColor();
+  static Color lightGreen = '#D4FFE6'.toColor();
+  static Color lightGreen2 = '#EDFFF4'.toColor();
+  static Color red = '#FB4241'.toColor();
+  static Color pink = '#FFD5D8'.toColor();
+  static Color yellow = '#FEC000'.toColor();
+  static Color lightOrange = '#FFEAD8'.toColor();
+  static Color lightOrange2 = '#FF9F53'.toColor();
+  static Color blue = '#1A7DFE'.toColor();
+  static Color lightBlue = '#D9EFFF'.toColor();
+  static Color lightBlue2 = '#F3F7FD'.toColor();
+  static Color blackText = Colors.black87;
+  static Color greyText = Colors.grey.shade700;
+  static Color darkGrey = Colors.grey.shade600;
+  static Color grey = Colors.grey;
+  static Color shadowGrey = Colors.grey.shade300;
+  static Color lightGrey = Colors.grey.shade200;
+  static Color white = Colors.white;
+  static Color blackButton = '#1F232E'.toColor();
+  static Color disable = Color(0xFFE3E3E3);
+  static Color transparent = Colors.transparent;
+
 }

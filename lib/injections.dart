@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'app/bloc/blocs.dart';
 import 'core/config/flavor.dart';
@@ -20,15 +21,33 @@ Future<void> initLocator(FlavorConfig flavor) async {
   // Flavor
   sl.registerSingleton<FlavorConfig>(flavor);
 
+  // Connectivity
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(Connectivity()));
+
   ///////////////
   //! Bloc / Cubit
   ///////////////
   // Article
-  sl.registerFactory(() => ArticleCubit(sl()));
+  sl.registerFactory(
+    () => ArticleCubit(
+      articleGetData: sl(),
+      networkInfo: sl(),
+    ),
+  );
   // Photos
-  sl.registerFactory(() => PhotosCubit(sl()));
+  sl.registerFactory(
+    () => PhotosCubit(
+      photosGetData: sl(),
+      networkInfo: sl(),
+    ),
+  );
   // User
-  sl.registerFactory(() => UserCubit(sl()));
+  sl.registerFactory(
+    () => UserCubit(
+      userGetData: sl(),
+      networkInfo: sl(),
+    ),
+  );
 
   ///////////////
   //! Usecase
@@ -45,22 +64,42 @@ Future<void> initLocator(FlavorConfig flavor) async {
 
   ///////////////
   //! Repository
-  ///////////////  
+  ///////////////
   // Article
-  sl.registerLazySingleton<ArticleRepository>(() => ArticleRepositoryImpl(sl()));
+  sl.registerLazySingleton<ArticleRepository>(
+    () => ArticleRepositoryImpl(
+      remoteDatasource: sl(),
+      localDatasource: sl(),
+      networkInfo: sl(),
+    ),
+  );
   // Photo
-  sl.registerLazySingleton<PhotoRepository>(() => PhotoRepositoryImpl(sl()));
+  sl.registerLazySingleton<PhotoRepository>(
+    () => PhotoRepositoryImpl(
+      remoteDatasource: sl(),
+      localDatasource: sl(),
+      networkInfo: sl(),
+    ),
+  );
   // User
-  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
-  
+  sl.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(
+      remoteDatasource: sl(),
+      localDatasource: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
   ///////////////
   //! DataSource
   ///////////////
   // Article
   sl.registerLazySingleton<ArticleRemoteDatasource>(() => ArticleRemoteDatasourceImpl(sl()));
+  sl.registerLazySingleton<ArticleLocalDatasource>(() => ArticleLocalDatasourceImpl());
   // Photo
   sl.registerLazySingleton<PhotoRemoteDatasource>(() => PhotoRemoteDatasourceImpl(sl()));
+  sl.registerLazySingleton<PhotoLocalDatasource>(() => PhotoLocalDatasourceImpl());
   // User
   sl.registerLazySingleton<UserRemoteDatasource>(() => UserRemoteDatasourceImpl(sl()));
-
+  sl.registerLazySingleton<UserLocalDatasource>(() => UserLocalDatasourceImpl());
 }

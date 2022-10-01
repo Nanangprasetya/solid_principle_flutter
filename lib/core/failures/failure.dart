@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../core.dart';
+
 abstract class Failure extends Equatable {
   final String? message;
 
@@ -18,10 +20,19 @@ class ServerFailure extends Failure {
   List<Object?> get props => [message];
 }
 
-class ProcessFailure extends Failure {
+class NotFoundFailure extends Failure {
   final String? message;
 
-  const ProcessFailure({this.message}) : super(message: message);
+  const NotFoundFailure({this.message = FAILURE_NOT_FOUND}) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class CacheFailure extends Failure {
+  final String? message;
+
+  const CacheFailure({this.message}) : super(message: message);
 
   @override
   List<Object?> get props => [message];

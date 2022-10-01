@@ -39,7 +39,7 @@ class PhotoContentCmp extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: AppColors.white, width: 2.0),
             image: const DecorationImage(
-              image: NetworkImage(AppImage.avatarUrl),
+              image: AssetImage(AppImages.profilePng),
               fit: BoxFit.cover,
             ),
           ),

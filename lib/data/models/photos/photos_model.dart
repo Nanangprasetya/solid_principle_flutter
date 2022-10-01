@@ -1,10 +1,22 @@
-import '../../../domain/domain.dart';
+import 'package:hive/hive.dart';
+import 'package:solid_principle_app/domain/domain.dart';
+import 'package:solid_principle_app/hive_helper/fields/photos_model_fields.dart';
+import 'package:solid_principle_app/hive_helper/hive_adapters.dart';
+import 'package:solid_principle_app/hive_helper/hive_types.dart';
 
+part 'photos_model.g.dart';
+
+@HiveType(typeId: HiveTypes.photosModel, adapterName: HiveAdapters.photosModel)
 class PhotosModel extends PhotosEntity {
+  @HiveField(PhotosModelFields.albumId)
   final int albumId;
+  @HiveField(PhotosModelFields.id)
   final int id;
+  @HiveField(PhotosModelFields.title)
   final String title;
+  @HiveField(PhotosModelFields.url)
   final String url;
+  @HiveField(PhotosModelFields.thumbnailUrl)
   final String thumbnailUrl;
 
   PhotosModel({

@@ -28,15 +28,21 @@ class ServerException implements Exception {
   static ServerException _handleError(int statusCode, dynamic error) {
     switch (statusCode) {
       case 400:
-        throw ServerException(message: 'Bad request ' + error["msg"]);
+        throw ServerException(message: '$EXCEPTION_BAD_REQ ' + error["msg"]);
       case 404:
-        throw ServerException(message: 'Not Found');
+        throw ServerException(message: EXCEPTION_NOT_FOUND);
       case 500:
-        throw ServerException(message: 'Internal server error');
+        throw ServerException(message: EXCEPTION_ISE);
       default:
-        throw ServerException(message: 'Oops something went wrong');
+        throw ServerException(message: EXCEPTION_WRONG);
     }
   }
+}
+
+class CacheException implements Exception {
+  final String? message;
+
+  CacheException({this.message});
 }
 
 class UnknownException implements Exception {

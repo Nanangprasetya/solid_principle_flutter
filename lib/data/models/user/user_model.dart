@@ -1,13 +1,27 @@
-import '../../../domain/domain.dart';
-import '../models.dart';
+import 'package:hive/hive.dart';
+import 'package:solid_principle_app/domain/domain.dart';
+import 'package:solid_principle_app/hive_helper/hive_types.dart';
+import 'package:solid_principle_app/hive_helper/hive_adapters.dart';
+import 'package:solid_principle_app/hive_helper/fields/user_model_fields.dart';
+import '../../data.dart';
 
+part 'user_model.g.dart';
+
+@HiveType(typeId: HiveTypes.userModel, adapterName: HiveAdapters.userModel)
 class UserModel extends UserEntity {
+	@HiveField(UserModelFields.id)
   final int id;
+	@HiveField(UserModelFields.name)
   final String name;
+	@HiveField(UserModelFields.username)
   final String username;
+	@HiveField(UserModelFields.email)
   final String email;
+	@HiveField(UserModelFields.phone)
   final String phone;
+	@HiveField(UserModelFields.website)
   final String website;
+	@HiveField(UserModelFields.address)
   final UserAddressModel address;
 
   UserModel({

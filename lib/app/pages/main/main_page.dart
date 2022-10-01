@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:solid_principle_app/app/pages/article/article_page.dart';
-import 'package:solid_principle_app/app/pages/photos/photos_page.dart';
-import 'package:solid_principle_app/app/pages/user/user_page.dart';
-import 'package:solid_principle_app/app/widgets/global/scaffold_responsive.dart';
-import 'package:solid_principle_app/injection.dart';
-import '../../bloc/blocs.dart';
-import 'component/drawer_cmp.dart';
+import 'package:solid_principle_app/injections.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../widgets/widget.dart';
+import '../../bloc/blocs.dart';
+import '../page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

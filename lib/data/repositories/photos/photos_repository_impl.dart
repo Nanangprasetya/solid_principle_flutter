@@ -1,22 +1,58 @@
 import 'package:dartz/dartz.dart';
+
 import '../../../core/core.dart';
 import '../../../domain/domain.dart';
+import '../../../service/service.dart';
 import '../../data.dart';
 
 class PhotoRepositoryImpl extends PhotoRepository {
-  final PhotoRemoteDatasource photoRemoteDatasource;
+  final PhotoRemoteDatasource remoteDatasource;
+  final PhotoLocalDatasource localDatasource;
+  final NetworkInfo networkInfo;
 
-  PhotoRepositoryImpl(this.photoRemoteDatasource);
+  PhotoRepositoryImpl({
+    required this.remoteDatasource,
+    required this.localDatasource,
+    required this.networkInfo,
+  });
 
   @override
   Future<Either<Failure, List<PhotosEntity>>> getPhotosData(PhotosParamsEntity params) async {
-    try {
-      List<PhotosEntity> data = await photoRemoteDatasource.getPhotosData(params);
+    return _checkPhotosCache(
+      () {
+        try {
+          return remoteDatasource.getPhotosData(params);
+        } catch (e) {
+          if (e is ServerException) {
+            return Left(ServerFailure(message: e.message));
+          } else {
+            return Left(UnknownFailure(message: FAILURE_UNKNOWN));
+          }
+        }
+      },
+      isInit: params.isInit,
+    );
+  }
 
-      return Right(data);
+  Future<Either<Failure, List<PhotosModel>>> _checkPhotosCache(Function() getPhotos, {required bool isInit}) async {
+    try {
+      if (await networkInfo.isConnected) {
+        if (isInit) {
+          localDatasource.photosDeleteCache();
+        }
+
+        final getPhotosRemote = await getPhotos();
+        localDatasource.photosToCache(getPhotosRemote);
+
+        return Right(getPhotosRemote);
+      } else {
+        List<PhotosModel> localData = await localDatasource.getPhotosFromCache();
+
+        return Right(localData);
+      }
     } catch (e) {
-      if (e is ServerException) {
-        return Left(ServerFailure(message: e.message));
+      if (e is CacheException) {
+        return Left(CacheFailure(message: e.message));
       } else {
         return Left(UnknownFailure(message: FAILURE_UNKNOWN));
       }

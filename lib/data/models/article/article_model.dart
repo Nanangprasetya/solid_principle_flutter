@@ -1,9 +1,20 @@
-import '../../../domain/domain.dart';
+import 'package:hive/hive.dart';
+import 'package:solid_principle_app/domain/domain.dart';
+import 'package:solid_principle_app/hive_helper/fields/article_model_fields.dart';
+import 'package:solid_principle_app/hive_helper/hive_adapters.dart';
+import 'package:solid_principle_app/hive_helper/hive_types.dart';
 
+part 'article_model.g.dart';
+
+@HiveType(typeId: HiveTypes.articleModel, adapterName: HiveAdapters.articleModel)
 class ArticleModel extends ArticleEntity {
+  @HiveField(ArticleModelFields.id)
   final int id;
+  @HiveField(ArticleModelFields.userId)
   final int userId;
+  @HiveField(ArticleModelFields.title)
   final String title;
+  @HiveField(ArticleModelFields.body)
   final String body;
 
   ArticleModel({

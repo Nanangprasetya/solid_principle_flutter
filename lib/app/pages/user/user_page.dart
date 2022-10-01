@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:solid_principle_app/app/widgets/global/bottom_loader.dart';
-import 'package:solid_principle_app/app/widgets/global/shimmer_custom.dart';
+import '../../widgets/widget.dart';
 import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
 
 class UserPage extends StatefulWidget {
   final PageStorageBucket bucket;
-  
+
   const UserPage({Key? key, required this.bucket}) : super(key: key);
 
   @override
@@ -34,17 +32,17 @@ class UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
-      listener: (context, state) {
-        if (state.message != null) {
-          Fluttertoast.showToast(msg: state.message!, toastLength: Toast.LENGTH_SHORT);
-        }
-      },
-      builder: (context, state) {
-        if (state is UserLoaded) {
-          return NotificationListener<ScrollNotification>(
-            onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_USERS),
-            child: SmartRefresher(
+    return NotificationListener<ScrollNotification>(
+      onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_USERS),
+      child: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state.message != null) {
+            Fluttertoast.showToast(msg: state.message!, toastLength: Toast.LENGTH_SHORT);
+          }
+        },
+        builder: (context, state) {
+          if (state is UserLoaded)
+            return SmartRefresher(
               controller: _refreshController,
               onRefresh: () {
                 context.read<UserCubit>().refreshUsers();
@@ -63,27 +61,16 @@ class UserPageState extends State<UserPage> {
                       ),
                 separatorBuilder: (_, index) => Divider(),
               ),
-            ),
-          );
-        } else if (state is UserNotLoaded) {
-          return Padding(
-            padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            child: Center(
-              child: Text(state.message),
-            ),
-          );
-        } else {
-          return ListView.separated(
-            padding: const EdgeInsets.all(AppDimens.radiusMedium),
-            itemCount: 5,
-            itemBuilder: (BuildContext context, int index) => ShimmerCustom(
-              height: AppDimens.sizeLargeX,
-              width: Get.width,
-            ),
-            separatorBuilder: (_, index) => SizedBox(height: AppDimens.marginPaddingSmall),
-          );
-        }
-      },
+            );
+          else if (state is UserNotLoaded)
+            return FailureView(
+              onPressed: () => context.read<UserCubit>().getAllData(),
+              message: state.message,
+            );
+          else
+            return ListLoader();
+        },
+      ),
     );
   }
 }

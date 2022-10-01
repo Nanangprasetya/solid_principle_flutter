@@ -1,0 +1,1 @@
+enum TypeButton {elevatedButton, textButton,outlinedButton,disableButton}
