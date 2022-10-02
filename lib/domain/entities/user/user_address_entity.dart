@@ -7,8 +7,8 @@ class UserAddressEntity extends Equatable {
   final String zipcode;
   final String lat;
   final String lng;
-  
-  UserAddressEntity({
+
+  const UserAddressEntity({
     required this.street,
     required this.suite,
     required this.city,
@@ -16,6 +16,12 @@ class UserAddressEntity extends Equatable {
     required this.lat,
     required this.lng,
   });
+
+  static const empty = UserAddressEntity(street: '', suite: '', city: '', zipcode: '', lat: '', lng: '');
+
+  bool get isEmpty => this == UserAddressEntity.empty;
+
+  bool get isNotEmpty => this != UserAddressEntity.empty;
 
   @override
   List<Object> get props {

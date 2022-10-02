@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
-import 'app/bloc/blocs.dart';
+import 'presentation/bloc/blocs.dart';
 import 'core/config/flavor.dart';
 import 'data/data.dart';
 import 'domain/domain.dart';
@@ -27,6 +27,8 @@ Future<void> initLocator(FlavorConfig flavor) async {
   ///////////////
   //! Bloc / Cubit
   ///////////////
+  // Main Tab
+  sl.registerFactory(() => MainCubit());
   // Article
   sl.registerFactory(
     () => ArticleCubit(
@@ -41,6 +43,7 @@ Future<void> initLocator(FlavorConfig flavor) async {
       networkInfo: sl(),
     ),
   );
+  sl.registerFactory(() => PhotosDetailCubit());
   // User
   sl.registerFactory(
     () => UserCubit(
@@ -48,6 +51,7 @@ Future<void> initLocator(FlavorConfig flavor) async {
       networkInfo: sl(),
     ),
   );
+  sl.registerFactory(() => UserDetailCubit());
 
   ///////////////
   //! Usecase

@@ -13,8 +13,8 @@ class AppColors  {
   static Color red = '#FB4241'.toColor();
   static Color pink = '#FFD5D8'.toColor();
   static Color yellow = '#FEC000'.toColor();
-  static Color lightOrange = '#FFEAD8'.toColor();
-  static Color lightOrange2 = '#FF9F53'.toColor();
+  static Color lightOrange = Color(0xFFF5E7DC);
+  static Color lightOrange2 = '#ffefe2'.toColor();
   static Color blue = '#1A7DFE'.toColor();
   static Color lightBlue = '#D9EFFF'.toColor();
   static Color lightBlue2 = '#F3F7FD'.toColor();
@@ -23,10 +23,9 @@ class AppColors  {
   static Color darkGrey = Colors.grey.shade600;
   static Color grey = Colors.grey;
   static Color shadowGrey = Colors.grey.shade300;
-  static Color lightGrey = Colors.grey.shade200;
+  static Color lightGrey = '#F1F1F1'.toColor();
   static Color white = Colors.white;
   static Color blackButton = '#1F232E'.toColor();
   static Color disable = Color(0xFFE3E3E3);
   static Color transparent = Colors.transparent;
-
 }

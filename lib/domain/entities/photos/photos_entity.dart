@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class PhotosEntity extends Equatable {
-  final int albumId;
   final int id;
+  final int albumId;
   final String title;
   final String url;
   final String thumbnailUrl;
 
-  PhotosEntity({
+  const PhotosEntity({
     required this.albumId,
     required this.id,
     required this.title,
@@ -15,14 +15,12 @@ class PhotosEntity extends Equatable {
     required this.thumbnailUrl,
   });
 
+  static const empty = PhotosEntity(albumId: 0, id: 0, title: '', url: '', thumbnailUrl: '');
+
+  bool get isEmpty => this == PhotosEntity.empty;
+
+  bool get isNotEmpty => this != PhotosEntity.empty;
+
   @override
-  List<Object> get props {
-    return [
-      albumId,
-      id,
-      title,
-      url,
-      thumbnailUrl,
-    ];
-  }
+  List<Object?> get props => [albumId, id, title, url, thumbnailUrl];
 }

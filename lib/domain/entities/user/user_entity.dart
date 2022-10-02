@@ -20,6 +20,20 @@ class UserEntity extends Equatable {
     required this.address,
   });
 
+  static const empty = UserEntity(
+    id: 0,
+    name: '',
+    username: '',
+    email: '',
+    phone: '',
+    website: '',
+    address: UserAddressEntity.empty,
+  );
+
+  bool get isEmpty => this == UserEntity.empty;
+
+  bool get isNotEmpty => this != UserEntity.empty;
+
   @override
   List<Object> get props {
     return [
