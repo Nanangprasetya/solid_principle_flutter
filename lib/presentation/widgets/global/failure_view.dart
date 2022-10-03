@@ -28,7 +28,7 @@ class FailureView extends StatelessWidget {
           SizedBox(height: AppDimens.marginPaddingLarge),
           SizedBox(
             width: Get.width / 2,
-            child: AppButton(
+            child: ButtonCustom(
               onPressed: onPressed,
               text: 'Reload Data',
             ),

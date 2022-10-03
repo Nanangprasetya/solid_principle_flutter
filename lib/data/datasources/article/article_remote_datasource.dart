@@ -5,8 +5,8 @@ import '../../data.dart';
 
 abstract class ArticleRemoteDatasource {
   Future<List<ArticleEntity>> getArticleData(ArticleParamsEntity params);
-  Future<ArticleEntity> postAticle(ArticlePostEntity params);
-  Future<ArticleEntity> putArticle(ArticlePutEntity params);
+  Future<bool> postAticle(ArticlePostEntity params);
+  Future<bool> putArticle(ArticlePutEntity params);
   Future<bool> deleteArticle(ArticleDeleteEntity params);
 }
 
@@ -22,15 +22,15 @@ class ArticleRemoteDatasourceImpl implements ArticleRemoteDatasource {
   }
 
   @override
-  Future<ArticleEntity> postAticle(ArticlePostEntity params) async {
-    final data = await baseApi.post(ARTICLE, data: params.toJson());
-    return ArticleModel.fromJson(data);
+  Future<bool> postAticle(ArticlePostEntity params) async {
+    await baseApi.post(ARTICLE, data: params.toJson());
+    return true;
   }
 
   @override
-  Future<ArticleEntity> putArticle(ArticlePutEntity params) async {
-    final data = await baseApi.post('$ARTICLE/${params.id}', data: params.toJson());
-    return ArticleModel.fromJson(data);
+  Future<bool> putArticle(ArticlePutEntity params) async {
+    await baseApi.post('$ARTICLE/${params.id}', data: params.toJson());
+    return true;
   }
 
   @override

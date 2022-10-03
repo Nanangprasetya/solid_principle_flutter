@@ -34,9 +34,9 @@ class ArticleRepositoryImpl extends ArticleRepository {
   }
 
   @override
-  Future<Either<Failure, ArticleEntity>> postArticle(ArticlePostEntity params) async {
+  Future<Either<Failure, bool>> postArticle(ArticlePostEntity params) async {
     try {
-      ArticleEntity data = await remoteDatasource.postAticle(params);
+      bool data = await remoteDatasource.postAticle(params);
 
       return Right(data);
     } catch (e) {
@@ -49,9 +49,9 @@ class ArticleRepositoryImpl extends ArticleRepository {
   }
 
   @override
-  Future<Either<Failure, ArticleEntity>> putArticle(ArticlePutEntity params) async {
+  Future<Either<Failure, bool>> putArticle(ArticlePutEntity params) async {
     try {
-      ArticleEntity data = await remoteDatasource.putArticle(params);
+      bool data = await remoteDatasource.putArticle(params);
 
       return Right(data);
     } catch (e) {

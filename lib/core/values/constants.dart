@@ -31,10 +31,19 @@ const String EXCEPTION_SEND_RTO = 'Send timeout in connection with API server';
 const String EXCEPTION_OTHER = 'Connection to API server failed due to internet connection';
 const String EXCEPTION_UNKNOWN = 'Connection to API server failed due to internet connection';
 const String EXCEPTION_BAD_REQ = 'Bad request ';
-const String EXCEPTION_NOT_FOUND = 'Data Not Found';
+const String EXCEPTION_NOT_FOUND = 'Not Found';
 const String EXCEPTION_ISE = 'Internal server error';
 const String EXCEPTION_WRONG = 'Something went wrong';
 
+// Success Input
+const String SUCCESS_POST = 'Successfull add data';
+const String SUCCESS_DELETE = 'Successfull delete data';
+const String SUCCESS_PUT = 'Successfull edit data';
+
+// Invalid Input
+const String INVALID_TITLE = 'Invalid Title';
+const String INVALID_BODY = 'Invalid Body';
+const String INVALID_FORM = 'Please Enter your data';
 
 // Network Info
 const String MESSAGE_UNCONNECTED= 'No Internet';

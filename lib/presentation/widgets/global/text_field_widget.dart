@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../core/core.dart';
+
 class TextFieldBasic extends StatelessWidget {
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String title;
   final String hint;
   final bool enabled;
@@ -15,11 +17,10 @@ class TextFieldBasic extends StatelessWidget {
   final FocusNode? focusNode;
   final Function(String)? onChanged;
   final int? maxLength;
-  final String? errorText;
 
   const TextFieldBasic({
     Key? key,
-    this.controller,
+    required this.controller,
     required this.title,
     required this.hint,
     this.enabled = true,
@@ -32,7 +33,6 @@ class TextFieldBasic extends StatelessWidget {
     this.onChanged,
     this.focusNode,
     this.maxLength = 225,
-    this.errorText,
   }) : super(key: key);
 
   @override
@@ -59,7 +59,6 @@ class TextFieldBasic extends StatelessWidget {
           hintText: hint,
           contentPadding: EdgeInsets.all(AppDimens.marginPaddingMedium),
           suffixText: suffixText,
-          errorText: errorText,
         ),
         enabled: enabled,
         maxLines: multiline ? 4 : 1,

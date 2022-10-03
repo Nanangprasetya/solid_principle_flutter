@@ -7,5 +7,5 @@ part 'photos_detail_state.dart';
 class PhotosDetailCubit extends Cubit<PhotosDetailState> {
   PhotosDetailCubit() : super(PhotosDetailState());
 
-  void setDetail(PhotosEntity params, bool isInit) => emit(PhotosDetailState(isInit: isInit, photosEntity: params));
+  void set(PhotosEntity params, bool isInit) => emit(PhotosDetailState(isInit: isInit, photosEntity: params));
 }

@@ -13,6 +13,12 @@ class ArticleEntity extends Equatable {
     required this.body,
   });
 
+  static const empty = ArticleEntity(id: 0, userId: 0, title: '', body: '');
+
+  bool get isEmpty => this == ArticleEntity.empty;
+
+  bool get isNotEmpty => this != ArticleEntity.empty;
+
   @override
   List<Object> get props => [id, userId, title, body];
 }

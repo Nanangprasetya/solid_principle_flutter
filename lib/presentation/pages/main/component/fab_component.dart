@@ -3,7 +3,7 @@ import 'package:solid_principle_app/core/core.dart';
 
 class FabComponent extends StatelessWidget {
   final MainTab selected;
-  final Function(MainTab i) onChange;
+  final Function onChange;
 
   const FabComponent({super.key, required this.selected, required this.onChange});
 
@@ -12,7 +12,7 @@ class FabComponent extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () => onChange(selected),
       child: Icon(Icons.add),
-      tooltip: 'Tambah Data',
+      tooltip: 'Add Data',
     );
   }
 }

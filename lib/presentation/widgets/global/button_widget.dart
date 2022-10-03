@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/core.dart';
 
-class AppButton extends StatelessWidget {
+class ButtonCustom extends StatelessWidget {
   final VoidCallback? onPressed;
 
   /// default type button is elevatedButton or FillButton
@@ -22,7 +22,7 @@ class AppButton extends StatelessWidget {
   final FocusNode? focusNode;
   final Color? textColor;
 
-  const AppButton({
+  const ButtonCustom({
     Key? key,
     required this.onPressed,
     this.text,
@@ -38,29 +38,29 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _backgroundColor = (typeButton == TypeButton.textButton)
+    Color _backgroundColor = (typeButton!.isTextButton)
         ? AppColors.transparent
-        : (typeButton == TypeButton.outlinedButton)
+        : (typeButton!.isOutlinedButton)
             ? AppColors.transparent
-            : (typeButton == TypeButton.disableButton)
+            : (typeButton!.isDisableButton)
                 ? AppColors.disable
                 : backgroundColor ?? AppColors.primary;
 
-    BorderSide _borderLine = (typeButton == TypeButton.textButton)
+    BorderSide _borderLine = (typeButton!.isTextButton)
         ? BorderSide.none
-        : (typeButton == TypeButton.outlinedButton)
+        : (typeButton!.isOutlinedButton)
             ? BorderSide(width: 1.0, color: backgroundColor ?? AppColors.primary)
             : BorderSide.none;
 
-    Color _textColor = (typeButton == TypeButton.textButton)
+    Color _textColor = (typeButton!.isTextButton)
         ? textColor ?? AppColors.white
-        : (typeButton == TypeButton.outlinedButton)
+        : (typeButton!.isOutlinedButton)
             ? textColor ?? AppColors.white
-            : (typeButton == TypeButton.disableButton)
+            : (typeButton!.isDisableButton)
                 ? AppColors.blackText
                 : textColor ?? AppColors.white;
 
-    if (typeButton == TypeButton.outlinedButton) {
+    if (typeButton!.isOutlinedButton) {
       return OutlinedButton(
         onPressed: () => onPressed!(),
         focusNode: focusNode,
@@ -74,7 +74,7 @@ class AppButton extends StatelessWidget {
       );
     }
 
-    if (typeButton == TypeButton.textButton) {
+    if (typeButton!.isTextButton) {
       return TextButton(
         onPressed: () => onPressed!(),
         focusNode: focusNode,

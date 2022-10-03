@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../../domain/domain.dart';
 import '../../routes/routes.dart';
 import '../../widgets/widget.dart';
 import '../../../core/core.dart';
@@ -40,17 +41,22 @@ class _ArticlePageState extends State<ArticlePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldResponsive(
-      floatingActionButton: FabComponent(
-        selected: MainTab.article,
-        onChange: (tab) {},
-      ),
-      body: _contentBuilder(context),
-      sideBar: ArticleFormPage(),
+    return BlocBuilder<ArticleDetailCubit, ArticleDetailState>(
+      builder: (ctx, state) {
+        return ScaffoldResponsive(
+          body: _contentBuilder(ctx, state),
+          sideBar: state.isInit ? ArticleFormPage() : ArticleDetailPage(articleEntity: state.articleEntity),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => Get.toNamed(AppRoutes.articleForm),
+            child: Icon(Icons.add),
+            tooltip: 'Add Data',
+          ),
+        );
+      },
     );
   }
 
-  NotificationListener<ScrollNotification> _contentBuilder(BuildContext context) {
+  Widget _contentBuilder(BuildContext ctxDtl, ArticleDetailState stateDtl) {
     return NotificationListener<ScrollNotification>(
       onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_ARTICLE),
       child: BlocConsumer<ArticleCubit, ArticleState>(
@@ -75,10 +81,13 @@ class _ArticlePageState extends State<ArticlePage> {
                 itemBuilder: (_, index) => index >= state.data.length
                     ? const BottomLoader()
                     : ListTile(
-                        onTap: () => Get.toNamed(AppRoutes.articleDetail, arguments: state.data[index]),
+                        onTap: () => _toDetailPressed(ctxDtl, state.data[index], stateDtl.articleEntity.id),
+                        selected: _selected(context, stateDtl.isInit, stateDtl.articleEntity.id, state.data[index].id),
                         leading: Text('${state.data[index].id}'),
                         title: Text(state.data[index].title),
                         subtitle: Text(state.data[index].body),
+                        selectedColor: AppColors.blackText,
+                        selectedTileColor: AppColors.lightOrange2,
                       ),
                 separatorBuilder: (_, index) => Divider(),
               ),
@@ -93,5 +102,21 @@ class _ArticlePageState extends State<ArticlePage> {
         },
       ),
     );
+  }
+
+  bool _selected(BuildContext context, bool isInit, int idDtl, int idData) =>
+      (context.isTabletUnder || isInit) ? false : idDtl == idData;
+
+  void _toDetailPressed(BuildContext ctxDtl, ArticleEntity data, int id) {
+    if (ctxDtl.isTabletUnder) {
+      ctxDtl.read<ArticleDetailCubit>().set(data, false);
+      Get.to(ArticleDetailPage(articleEntity: data));
+    } else {
+      if (id == data.id) {
+        ctxDtl.read<ArticleDetailCubit>().set(ArticleEntity.empty, true);
+      } else {
+        ctxDtl.read<ArticleDetailCubit>().set(data, false);
+      }
+    }
   }
 }

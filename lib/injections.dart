@@ -36,6 +36,9 @@ Future<void> initLocator(FlavorConfig flavor) async {
       networkInfo: sl(),
     ),
   );
+  sl.registerFactory(() => ArticleDetailCubit());
+  sl.registerFactory(() => ArticlePostCubit(sl()));
+  sl.registerFactory(() => ArticleDeleteCubit(sl()));
   // Photos
   sl.registerFactory(
     () => PhotosCubit(

@@ -14,6 +14,7 @@ class ScaffoldResponsive extends StatelessWidget {
   final Widget? floatingActionButton;
   final bool? hasLeading;
   final Color? backgroundColor;
+  final bool? isNormalFab;
 
   const ScaffoldResponsive({
     super.key,
@@ -28,6 +29,7 @@ class ScaffoldResponsive extends StatelessWidget {
     this.floatingActionButton,
     this.hasLeading = true,
     this.backgroundColor,
+    this.isNormalFab = false,
   });
 
   @override
@@ -48,7 +50,11 @@ class ScaffoldResponsive extends StatelessWidget {
       drawer: (context.isPhone) ? drawer : null,
       backgroundColor: backgroundColor,
       bottomNavigationBar: (context.isPhone) ? bottomNavigationBar : null,
-      floatingActionButton: (context.isDesktop) ? floatingActionButton : null,
+      floatingActionButton: isNormalFab!
+          ? floatingActionButton
+          : (context.isTabletUnder)
+              ? floatingActionButton
+              : null,
       body: context.responsiveValue<Widget>(
         desktop: _desktopLayout(context),
         tablet: _tabletLayout(context),
@@ -99,7 +105,7 @@ class ScaffoldResponsive extends StatelessWidget {
                 child: body,
               )
             : Expanded(
-                flex: (context.isDesktop) ? 1 : 6,
+                flex: (context.isTabletUnder) ? 1 : 6,
                 child: body,
               ),
       ],

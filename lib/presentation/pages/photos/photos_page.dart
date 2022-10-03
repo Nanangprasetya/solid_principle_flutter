@@ -89,17 +89,17 @@ class _PhotosPageState extends State<PhotosPage> {
   }
 
   bool _selected(BuildContext context, bool isInit, int idDtl, int idData) =>
-      (context.isDesktop || isInit) ? false : idDtl == idData;
+      (context.isTabletUnder || isInit) ? false : idDtl == idData;
 
   void _toDetailPressed(BuildContext ctxDtl, PhotosEntity data, int id) {
-    if (ctxDtl.isDesktop) {
-      ctxDtl.read<PhotosDetailCubit>().setDetail(data, false);
+    if (ctxDtl.isTabletUnder) {
+      ctxDtl.read<PhotosDetailCubit>().set(data, false);
       Get.to(PhotosDetailPage(photosEntity: data));
     } else {
       if (id == data.id) {
-        ctxDtl.read<PhotosDetailCubit>().setDetail(PhotosEntity.empty, true);
+        ctxDtl.read<PhotosDetailCubit>().set(PhotosEntity.empty, true);
       } else {
-        ctxDtl.read<PhotosDetailCubit>().setDetail(data, false);
+        ctxDtl.read<PhotosDetailCubit>().set(data, false);
       }
     }
   }

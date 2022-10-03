@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solid_principle_app/core/core.dart';
+import '../../../../core/core.dart';
 import '../../../widgets/widget.dart';
 
 class DrawerComponent extends StatelessWidget {
@@ -17,19 +17,19 @@ class DrawerComponent extends StatelessWidget {
         ),
         DrawerListTile(
           title: "Article",
-          isActive: selected == MainTab.article,
+          isActive: selected.isArticle,
           icon: Icon(Icons.article),
           press: () => onChange(MainTab.article),
         ),
         DrawerListTile(
           title: "Photos",
-          isActive: selected == MainTab.photos,
+          isActive: selected.isPhotos,
           icon: Icon(Icons.photo_album),
           press: () => onChange(MainTab.photos),
         ),
         DrawerListTile(
           title: "Users",
-          isActive: selected == MainTab.users,
+          isActive: selected.isUsers,
           icon: Icon(Icons.people),
           press: () => onChange(MainTab.users),
         ),

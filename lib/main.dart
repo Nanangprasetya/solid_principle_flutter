@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:solid_principle_app/core/themes/app_theme.dart';
 import 'package:solid_principle_app/hive_helper/register_adapters.dart';
 import 'package:solid_principle_app/injections.dart';
 import 'presentation/routes/routes.dart';
@@ -32,15 +32,7 @@ class Apps extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Solid Principle',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: AppColors.primary,
-        colorScheme: ThemeData().colorScheme.copyWith(
-              primary: AppColors.primary,
-              secondary: AppColors.secondary,
-            ),
-        appBarTheme: AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
-      ),
+      theme: AppTheme.lightTheme,
       initialRoute: AppRoutes.home,
       getPages: AppPages.pageRoute,
     );

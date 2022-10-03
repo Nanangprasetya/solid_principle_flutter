@@ -13,8 +13,8 @@ class PhotosDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldResponsive(
-      backgroundColor: context.isDesktop ? AppColors.white : AppColors.lightGrey,
-      titleAppBar: context.isDesktop ? Text('Photo Details') : null,
+      backgroundColor: context.isTabletUnder ? AppColors.white : AppColors.lightGrey,
+      titleAppBar: context.isTabletUnder ? Text('Photo Details') : null,
       body: _contentBuilder(),
     );
   }

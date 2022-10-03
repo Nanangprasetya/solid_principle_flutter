@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:solid_principle_app/presentation/pages/user/user.dart';
-import '../../../domain/domain.dart';
-import '../../widgets/widget.dart';
 import '../../../core/core.dart';
+import '../../../domain/domain.dart';
 import '../../bloc/blocs.dart';
+import '../../widgets/widget.dart';
+import '../page.dart';
 
 class UserPage extends StatefulWidget {
   final PageStorageBucket bucket;
@@ -93,17 +93,17 @@ class UserPageState extends State<UserPage> {
   }
 
   bool _selected(BuildContext context, bool isInit, int idDtl, int idData) =>
-      (context.isDesktop || isInit) ? false : idDtl == idData;
+      (context.isTabletUnder || isInit) ? false : idDtl == idData;
 
   void _toDetailPressed(BuildContext ctxDtl, UserEntity data, int id) {
-    if (ctxDtl.isDesktop) {
-      ctxDtl.read<UserDetailCubit>().setDetail(data, false);
+    if (ctxDtl.isTabletUnder) {
+      ctxDtl.read<UserDetailCubit>().set(data, false);
       Get.to(UserDetailPage(userEntity: data));
     } else {
       if (id == data.id) {
-        ctxDtl.read<UserDetailCubit>().setDetail(UserEntity.empty, true);
+        ctxDtl.read<UserDetailCubit>().set(UserEntity.empty, true);
       } else {
-        ctxDtl.read<UserDetailCubit>().setDetail(data, false);
+        ctxDtl.read<UserDetailCubit>().set(data, false);
       }
     }
   }

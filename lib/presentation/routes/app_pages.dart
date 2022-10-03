@@ -14,8 +14,8 @@ class AppPages {
           transition: getTrans.Transition.rightToLeft,
         ),
         GetPage(
-          name: _Routes.articleDetail,
-          page: () => ArticleDetailPage(),
+          name: _Routes.articleForm,
+          page: () => ArticleFormPage(),
           transition: getTrans.Transition.rightToLeft,
         ),
       ];

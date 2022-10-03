@@ -8,5 +8,5 @@ part 'user_detail_state.dart';
 class UserDetailCubit extends Cubit<UserDetailState> {
   UserDetailCubit() : super(UserDetailState());
 
-  void setDetail(UserEntity params, bool isInit) => emit(UserDetailState(isInit: isInit, userEntity: params));
+  void set(UserEntity params, bool isInit) => emit(UserDetailState(isInit: isInit, userEntity: params));
 }

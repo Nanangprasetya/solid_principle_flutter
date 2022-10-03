@@ -11,8 +11,8 @@ class UserDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldResponsive(
-      backgroundColor: context.isDesktop ? AppColors.white : AppColors.lightGrey,
-      titleAppBar: context.isDesktop ? Text('User Details') : null,
+      backgroundColor: context.isTabletUnder ? AppColors.white : AppColors.lightGrey,
+      titleAppBar: context.isTabletUnder ? Text('User Details') : null,
       body: _contentBuilder(),
     );
   }

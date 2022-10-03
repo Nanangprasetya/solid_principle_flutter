@@ -24,6 +24,9 @@ class MainPage extends StatelessWidget {
         BlocProvider<UserCubit>(
           create: (context) => sl<UserCubit>()..getAllData(),
         ),
+        BlocProvider<ArticleDetailCubit>(
+          create: (context) => sl<ArticleDetailCubit>(),
+        ),
         BlocProvider<PhotosDetailCubit>(
           create: (context) => sl<PhotosDetailCubit>(),
         ),
