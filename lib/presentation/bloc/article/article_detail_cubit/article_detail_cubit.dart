@@ -10,6 +10,14 @@ class ArticleDetailCubit extends Cubit<ArticleDetailState> {
   ArticleDetailCubit() : super(ArticleDetailState());
 
   void set(ArticleEntity params, bool isInit) => emit(state.copyWith(isInit: isInit, articleEntity: params));
-  void setToForm() => emit(state.copyWith(typePage: TypePage.form));
-  void setToDetail() => emit(state.copyWith(typePage: TypePage.detail));
+
+  void setToForm(ArticleEntity params) => emit(
+        state.copyWith(
+          typePage: TypePage.form,
+          typeForm: TypeForm.edit,
+          articleEntity: params,
+        ),
+      );
+      
+  void setToDetail() => emit(state.copyWith(typePage: TypePage.detail, typeForm: TypeForm.add));
 }

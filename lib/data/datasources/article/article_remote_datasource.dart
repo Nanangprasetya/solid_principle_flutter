@@ -29,7 +29,7 @@ class ArticleRemoteDatasourceImpl implements ArticleRemoteDatasource {
 
   @override
   Future<bool> putArticle(ArticlePutEntity params) async {
-    await baseApi.post('$ARTICLE/${params.id}', data: params.toJson());
+    await baseApi.put('$ARTICLE/${params.id}', data: params.toJson());
     return true;
   }
 

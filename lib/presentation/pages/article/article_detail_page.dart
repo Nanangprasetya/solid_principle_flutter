@@ -19,6 +19,7 @@ class ArticleDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        if (context.isTabletUnder)
         BlocProvider<ArticleDetailCubit>(
           create: (context) => sl<ArticleDetailCubit>(),
         ),
@@ -81,7 +82,7 @@ class ArticleDetailPage extends StatelessWidget {
                       body: articleEntity.body,
                     ),
                   ),
-              onEdit: () => ctxDtl.read<ArticleDetailCubit>().setToForm(),
+              onEdit: () => ctxDtl.read<ArticleDetailCubit>().setToForm(articleEntity),
             );
           },
         );

@@ -8,6 +8,8 @@ enum MainTab { article, photos, users }
 
 enum TypePage { detail, form }
 
+enum TypeForm { edit, add }
+
 enum TitleValidationError { empty }
 
 enum BodyValidationError { empty }

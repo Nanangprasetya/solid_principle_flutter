@@ -8,50 +8,61 @@ import '../../widgets/widget.dart';
 import 'component/component.dart';
 
 class ArticleFormPage extends StatelessWidget {
-  const ArticleFormPage({Key? key}) : super(key: key);
+  final bool? isAdd;
+
+  const ArticleFormPage({super.key, this.isAdd = false});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        if(isAdd!)
+          BlocProvider<ArticleDetailCubit>(
+            create: (context) => sl<ArticleDetailCubit>(),
+          ),
         BlocProvider<ArticlePostCubit>(
           create: (context) => sl<ArticlePostCubit>(),
         ),
       ],
-      child: _contentBuilder(context),
+      child: BlocBuilder<ArticleDetailCubit, ArticleDetailState>(
+        builder: (ctxDtl, detail) {
+          return ScaffoldResponsive(
+            isNormalFab: true,
+            backgroundColor: context.isTabletUnder ? AppColors.white : AppColors.lightGrey,
+            titleAppBar: context.isTabletUnder ? Text(detail.typeForm.isEdit ? 'Edit Article' : 'Add Article') : null,
+            floatingActionButton: detail.typePage.isForm && !context.isTabletUnder
+                ? FloatingActionButton(
+                    onPressed: () => ctxDtl.read<ArticleDetailCubit>().setToDetail(),
+                    child: Icon(Icons.close),
+                    backgroundColor: AppColors.blackButton,
+                  )
+                : null,
+            body: _contentBuilder(context, detail),
+          );
+        },
+      ),
     );
   }
 
-  Widget _contentBuilder(BuildContext context) {
-    return BlocBuilder<ArticleDetailCubit, ArticleDetailState>(
-      builder: (ctxDtl, state) {
-        return ScaffoldResponsive(
-          isNormalFab: true,
-          backgroundColor: context.isTabletUnder ? AppColors.white : AppColors.lightGrey,
-          titleAppBar: context.isTabletUnder ? Text('Add Article') : null,
-          floatingActionButton: state.typePage.isForm && !context.isTabletUnder
-              ? FloatingActionButton(
-                  onPressed: () => ctxDtl.read<ArticleDetailCubit>().setToDetail(),
-                  child: Icon(Icons.close),
-                  backgroundColor: AppColors.blackButton,
-                )
-              : null,
-          body: Padding(
-            padding: EdgeInsets.all(AppDimens.marginPaddingMedium),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TitleInput(),
-                SizedBox(height: AppDimens.marginPaddingLarge),
-                BodyInput(),
-                SizedBox(height: AppDimens.marginPaddingLarge),
-                ButtonSubmitted(),
-              ],
-            ),
-          ),
-        );
-      },
+  Widget _contentBuilder(BuildContext context, ArticleDetailState detail) {
+    return BlocProvider(
+      create: (context) => sl<ArticlePutCubit>()
+        ..onTitleChanged(detail.articleEntity.title)
+        ..onBodyChanged(detail.articleEntity.body),
+      child: Padding(
+        padding: EdgeInsets.all(AppDimens.marginPaddingMedium),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TitleInput(),
+            SizedBox(height: AppDimens.marginPaddingLarge),
+            BodyInput(),
+            SizedBox(height: AppDimens.marginPaddingLarge),
+            ButtonSubmitted(),
+          ],
+        ),
+      ),
     );
   }
 }
