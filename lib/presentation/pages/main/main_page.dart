@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:solid_principle_app/core/core.dart';
 import 'package:solid_principle_app/injections.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/widget.dart';
@@ -46,6 +48,7 @@ class MainPage extends StatelessWidget {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         final selectedTab = state.tab;
+        final isDrawer = state.isDrawer;
 
         return ScaffoldResponsive(
           titleAppBar: Text('Solid Principle App'),
@@ -53,10 +56,14 @@ class MainPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FlutterLogo(),
           ),
-          drawer: DrawerComponent(
-            selected: selectedTab,
-            onChange: (tab) => context.read<MainCubit>().setTab(tab.index),
-          ),
+          actionAppBar: [
+            IconButton(
+              onPressed: () => AppUtils.launch(sl<FlavorConfig>().values!.urlGithub!),
+              icon: SvgPicture.asset(AppImages.githubSvg),
+            ),
+          ],
+          isDrawer: isDrawer,
+          drawer: DrawerComponent(),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: selectedTab.index,
             onTap: (index) => context.read<MainCubit>().setTab(index),

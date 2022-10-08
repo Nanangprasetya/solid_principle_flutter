@@ -15,6 +15,7 @@ class ScaffoldResponsive extends StatelessWidget {
   final bool? hasLeading;
   final Color? backgroundColor;
   final bool? isNormalFab;
+  final bool? isDrawer;
 
   const ScaffoldResponsive({
     super.key,
@@ -30,6 +31,7 @@ class ScaffoldResponsive extends StatelessWidget {
     this.hasLeading = true,
     this.backgroundColor,
     this.isNormalFab = false,
+    this.isDrawer,
   });
 
   @override
@@ -69,8 +71,8 @@ class ScaffoldResponsive extends StatelessWidget {
       children: [
         if (drawer != null)
           SizedBox(
-            width: AppDimens.widthDrawer,
-            child: _drawerBuild(),
+            width: isDrawer! ? AppDimens.maxWidthDrawer : AppDimens.minWidthDrawer,
+            child: drawer,
           ),
         Expanded(
           flex: 6,
@@ -79,7 +81,7 @@ class ScaffoldResponsive extends StatelessWidget {
         if (sideBar != null)
           Expanded(
             flex: 3,
-            child: _sideBuild(),
+            child: sideBar!,
           ),
       ],
     );
@@ -90,33 +92,17 @@ class ScaffoldResponsive extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (drawer != null)
-          context.isLargeTablet
-              ? SizedBox(
-                  width: AppDimens.widthDrawer,
-                  child: _drawerBuild(),
-                )
-              : SizedBox(
-                  width: AppDimens.sizeLargeX,
-                  child: _drawerBuild(),
-                ),
-        context.isLargeTablet
-            ? Expanded(
-                flex: 6,
-                child: body,
-              )
-            : Expanded(
-                flex: (context.isTabletUnder) ? 1 : 6,
-                child: body,
-              ),
+          SizedBox(
+            width: isDrawer! ? AppDimens.maxWidthDrawer : AppDimens.minWidthDrawer,
+            child: drawer,
+          ),
+        Expanded(
+          flex: (context.isTabletUnder) ? 1 : 6,
+          child: body,
+        ),
       ],
     );
   }
 
-  Widget _mobileLayout(BuildContext context) {
-    return body;
-  }
-
-  Widget _drawerBuild() => Container(color: AppColors.lightGrey, child: drawer);
-
-  Widget _sideBuild() => Container(color: AppColors.lightGrey, child: sideBar);
+  Widget _mobileLayout(BuildContext context) => body;
 }

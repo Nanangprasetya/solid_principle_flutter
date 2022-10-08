@@ -36,6 +36,7 @@ class EnvValues {
   final bool? debug;
   final bool? printResponse;
   final String? appVersion;
+  final String? urlGithub;
 
   EnvValues({
     required this.baseApi,
@@ -43,5 +44,6 @@ class EnvValues {
     required this.debug,
     required this.printResponse,
     required this.appVersion,
+    required this.urlGithub,
   });
 }

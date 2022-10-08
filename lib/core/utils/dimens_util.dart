@@ -18,7 +18,8 @@ class AppDimens {
   static const double savingBalanceCard = 70.0;
   static const double infinityHeight = 50;
   static const double heightListTile = 40.0;
-  static const double widthDrawer = 200.0;
+  static const double maxWidthDrawer = 240.0;
+  static const double minWidthDrawer = 56.0;
   
   /// 120
   static double sizeLong = 120; 

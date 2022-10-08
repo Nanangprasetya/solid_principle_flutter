@@ -10,7 +10,8 @@ void main() {
         baseApi: 'https://jsonplaceholder.typicode.com/',
         debug: false,
         delay: 3000,
-        printResponse: true,
+        printResponse: true, 
+        urlGithub: 'https://github.com/Nanangprasetya/solid_principle_flutter/',
       ),
     ),
   );

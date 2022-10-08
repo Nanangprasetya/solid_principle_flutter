@@ -28,7 +28,7 @@ class BodyInput extends StatelessWidget {
                   title: 'Body',
                   hint: 'Enter Body',
                   multiline: true,
-                  validator: (_) => (post.body.invalid || put.body.invalid) ? INVALID_BODY : null,
+                  errorText: (post.body.invalid && put.body.invalid) ? INVALID_BODY : null,
                 );
               },
             );

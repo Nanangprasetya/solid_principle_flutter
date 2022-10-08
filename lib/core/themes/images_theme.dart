@@ -5,5 +5,7 @@ class AppImages {
   static const String pleasePng = 'assets/images/please.png';
   static const String profilePng = 'assets/images/profile.png';
 
+  static const String githubSvg = 'assets/images/logo_github.svg';
+
   static const String avatarUrl = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
 }

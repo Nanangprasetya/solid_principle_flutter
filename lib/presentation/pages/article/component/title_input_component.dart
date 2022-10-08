@@ -28,7 +28,7 @@ class TitleInput extends StatelessWidget {
                   title: 'Title',
                   hint: 'Enter Title',
                   multiline: true,
-                  validator: (_) => (post.title.invalid || put.title.invalid) ? INVALID_TITLE : null,
+                  errorText: (post.title.invalid && put.title.invalid) ? INVALID_TITLE : null,
                 );
               },
             );
