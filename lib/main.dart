@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:solid_principle_app/core/themes/app_theme.dart';
-import 'package:solid_principle_app/hive_helper/register_adapters.dart';
 import 'package:solid_principle_app/injections.dart';
+import 'helper/helper.dart';
 import 'presentation/routes/routes.dart';
 import 'core/core.dart';
+
 
 void mainCommon(FlavorConfig flavor) async {
   WidgetsFlutterBinding.ensureInitialized();

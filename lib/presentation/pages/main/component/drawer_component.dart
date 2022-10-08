@@ -28,10 +28,11 @@ class DrawerComponent extends StatelessWidget {
               child: ListView(
                 children: [
                   DrawerHeaderWidget(
+                    onPressed: () => AppUtils.launch('https://linktr.ee/nanang_prasetya'),
                     isDrawer: isDrawer,
                     urlAvatar: 'https://avatars.githubusercontent.com/u/47396677?v=4',
                     title: 'Nanang Prasetya',
-                    subTitle: 'Flutter Developer',
+                    subTitle: 'Flutter Developer', 
                   ),
                   DrawerListTile(
                     title: "Article",
