@@ -31,6 +31,7 @@ class Apps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: !sl<FlavorConfig>().values!.debug!,
       title: 'Solid Principle',
       theme: AppTheme.lightTheme,
       initialRoute: AppRoutes.home,

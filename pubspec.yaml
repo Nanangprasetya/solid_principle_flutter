@@ -1,5 +1,5 @@
 name: solid_principle_app
-description: A new Flutter project.
+description: SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin (also known as Uncle Bob).
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -21,7 +21,7 @@ dependencies:
   device_preview: ^1.1.0
   fluttertoast: ^8.0.9
   shimmer: ^2.0.0
-  dio: ^4.0.6
+  dio: 4.0.4
   pretty_dio_logger: ^1.2.0-beta-1
   pull_to_refresh: ^2.0.0
   cached_network_image: ^3.2.1
@@ -30,6 +30,8 @@ dependencies:
   hive_flutter: ^1.1.0
   formz: ^0.4.1
   flutter_spinkit: ^5.1.0
+  flutter_svg: ^1.1.5
+  url_launcher: ^6.1.6
 
 dependency_overrides:
     pull_to_refresh:

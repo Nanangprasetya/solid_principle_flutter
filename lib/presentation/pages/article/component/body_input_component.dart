@@ -6,18 +6,33 @@ import '../../../bloc/blocs.dart';
 import '../../../widgets/widget.dart';
 
 class BodyInput extends StatelessWidget {
-  const BodyInput({Key? key}) : super(key: key);
+  final bool? isEdit;
+
+  const BodyInput({super.key, this.isEdit = false});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ArticlePostCubit, ArticlePostState>(
-      buildWhen: (previous, current) => previous.body != current.body,
-      builder: (context, state) {
-        return TextFieldBasic(
-          onChanged: (value) => context.read<ArticlePostCubit>().onBodyChanged(value),
-          title: 'Body',
-          hint: 'Enter Body',
-          validator: (_) => state.body.invalid ? INVALID_BODY : null,
+    return BlocBuilder<ArticleDetailCubit, ArticleDetailState>(
+      builder: (_, detail) {
+        return BlocBuilder<ArticlePostCubit, ArticlePostState>(
+          buildWhen: (previous, current) => previous.body != current.body,
+          builder: (ctxPost, post) {
+            return BlocBuilder<ArticlePutCubit, ArticlePutState>(
+              buildWhen: (previous, current) => previous.body != current.body,
+              builder: (ctxPut, put) {
+                return TextFieldBasic(
+                  onChanged: (value) => detail.typeForm.isEdit
+                      ? ctxPut.read<ArticlePutCubit>().onBodyChanged(value)
+                      : ctxPost.read<ArticlePostCubit>().onBodyChanged(value),
+                  initialValue: detail.typeForm.isEdit ? detail.articleEntity.body : null,
+                  title: 'Body',
+                  hint: 'Enter Body',
+                  multiline: true,
+                  errorText: (post.body.invalid && put.body.invalid) ? INVALID_BODY : null,
+                );
+              },
+            );
+          },
         );
       },
     );

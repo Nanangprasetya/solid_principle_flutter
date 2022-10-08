@@ -7,6 +7,7 @@ class TextFieldBasic extends StatelessWidget {
   final String hint;
   final bool enabled;
   final bool multiline;
+  final String? initialValue;
   final TextInputType? inputType;
   final TextInputAction? inputAction;
   final String? suffixText;
@@ -16,12 +17,14 @@ class TextFieldBasic extends StatelessWidget {
   final Function(String)? onChanged;
   final int? maxLength;
   final String? errorText;
+  final bool? autocorrect;
 
   const TextFieldBasic({
     Key? key,
     this.controller,
     required this.title,
     required this.hint,
+    this.initialValue,
     this.enabled = true,
     this.multiline = false,
     this.inputType,
@@ -33,12 +36,14 @@ class TextFieldBasic extends StatelessWidget {
     this.focusNode,
     this.maxLength = 225,
     this.errorText,
+    this.autocorrect = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        initialValue: initialValue,
         controller: controller,
         focusNode: focusNode,
         keyboardType: inputType == null ? null : inputType,
@@ -68,6 +73,7 @@ class TextFieldBasic extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         obscureText: obscure,
         onChanged: onChanged,
+        autocorrect: autocorrect!,
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
         ],

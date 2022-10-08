@@ -7,12 +7,12 @@ import '../../../../core/core.dart';
 import '../../../../domain/domain.dart';
 import '../../../models/models.dart';
 
-part 'article_post_state.dart';
+part 'article_put_state.dart';
 
-class ArticlePostCubit extends Cubit<ArticlePostState> {
-  final ArticlePostData articlePostData;
+class ArticlePutCubit extends Cubit<ArticlePutState> {
+  final ArticlePutData articlePutData;
 
-  ArticlePostCubit(this.articlePostData) : super(ArticlePostState());
+  ArticlePutCubit(this.articlePutData) : super(ArticlePutState());
 
   void onTitleChanged(String value) {
     final title = TitleValidator.dirty(value);
@@ -32,11 +32,12 @@ class ArticlePostCubit extends Cubit<ArticlePostState> {
     ));
   }
 
-  Future<void> onPost() async {
+  void onPut(int id) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
-      Either<Failure, bool> data = await articlePostData.call(ArticlePostEntity(
+      Either<Failure, bool> data = await articlePutData.call(ArticlePutEntity(
+        id: id,
         title: state.title.value,
         body: state.body.value,
       ));
@@ -48,7 +49,7 @@ class ArticlePostCubit extends Cubit<ArticlePostState> {
         )),
         (value) => emit(state.copyWith(
           status: FormzStatus.submissionSuccess,
-          message: SUCCESS_POST,
+          message: SUCCESS_PUT,
         )),
       );
     }

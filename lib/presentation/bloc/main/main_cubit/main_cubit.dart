@@ -11,13 +11,15 @@ class MainCubit extends Cubit<MainState> {
   void setTab(int tab) {
     switch (tab) {
       case 2:
-        emit(MainState(tab: MainTab.users));
+        emit(state.copyWith(tab: MainTab.users));
         break;
       case 1:
-        emit(MainState(tab: MainTab.photos));
+        emit(state.copyWith(tab: MainTab.photos));
         break;
       default:
-        emit(MainState(tab: MainTab.article));
+        emit(state.copyWith(tab: MainTab.article));
     }
   }
+
+  void setDrawer(bool isDrawer) => emit(state.copyWith(isDrawer: !isDrawer));
 }

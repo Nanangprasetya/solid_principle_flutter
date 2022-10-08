@@ -6,18 +6,33 @@ import '../../../bloc/blocs.dart';
 import '../../../widgets/widget.dart';
 
 class TitleInput extends StatelessWidget {
-  const TitleInput({Key? key}) : super(key: key);
+  final bool? isEdit;
+
+  const TitleInput({super.key, this.isEdit = false});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ArticlePostCubit, ArticlePostState>(
-      buildWhen: (previous, current) => previous.title != current.title,
-      builder: (context, state) {
-        return TextFieldBasic(
-          onChanged: (value) => context.read<ArticlePostCubit>().onTitleChanged(value),
-          title: 'Title',
-          hint: 'Enter Title',
-          validator: (_) => state.title.invalid ? INVALID_TITLE : null,
+    return BlocBuilder<ArticleDetailCubit, ArticleDetailState>(
+      builder: (_, detail) {
+        return BlocBuilder<ArticlePostCubit, ArticlePostState>(
+          buildWhen: (previous, current) => previous.title != current.title,
+          builder: (ctxPost, post) {
+            return BlocBuilder<ArticlePutCubit, ArticlePutState>(
+              buildWhen: (previous, current) => previous.title != current.title,
+              builder: (ctxPut, put) {
+                return TextFieldBasic(
+                  onChanged: (value) => detail.typeForm.isEdit
+                      ? ctxPut.read<ArticlePutCubit>().onTitleChanged(value)
+                      : ctxPost.read<ArticlePostCubit>().onTitleChanged(value),
+                  initialValue: detail.typeForm.isEdit ? detail.articleEntity.title : null,
+                  title: 'Title',
+                  hint: 'Enter Title',
+                  multiline: true,
+                  errorText: (post.title.invalid && put.title.invalid) ? INVALID_TITLE : null,
+                );
+              },
+            );
+          },
         );
       },
     );

@@ -5,6 +5,11 @@ extension TypePageEnum on TypePage {
   bool get isDetail => this == TypePage.detail;
 }
 
+extension TypeFormEnum on TypeForm {
+  bool get isEdit => this == TypeForm.edit;
+  bool get isAdd => this == TypeForm.add;
+}
+
 extension MainTabEnum on MainTab {
   bool get isArticle => this == MainTab.article;
   bool get isPhotos => this == MainTab.photos;

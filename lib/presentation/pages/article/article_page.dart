@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../domain/domain.dart';
-import '../../routes/routes.dart';
 import '../../widgets/widget.dart';
 import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
@@ -45,9 +44,9 @@ class _ArticlePageState extends State<ArticlePage> {
       builder: (ctx, state) {
         return ScaffoldResponsive(
           body: _contentBuilder(ctx, state),
-          sideBar: state.isInit ? ArticleFormPage() : ArticleDetailPage(articleEntity: state.articleEntity),
+          sideBar: state.isInit ? ArticleFormPage(isAdd: true) : ArticleDetailPage(articleEntity: state.articleEntity),
           floatingActionButton: FloatingActionButton(
-            onPressed: () => Get.toNamed(AppRoutes.articleForm),
+            onPressed: () => Get.to(ArticleFormPage(isAdd: true)),
             child: Icon(Icons.add),
             tooltip: 'Add Data',
           ),
@@ -56,7 +55,7 @@ class _ArticlePageState extends State<ArticlePage> {
     );
   }
 
-  Widget _contentBuilder(BuildContext ctxDtl, ArticleDetailState stateDtl) {
+  Widget _contentBuilder(BuildContext ctxDtl, ArticleDetailState detail) {
     return NotificationListener<ScrollNotification>(
       onNotification: (pos) => widget.bucket.saveScrollOffset(context, pos: pos, key: KEY_ARTICLE),
       child: BlocConsumer<ArticleCubit, ArticleState>(
@@ -81,8 +80,8 @@ class _ArticlePageState extends State<ArticlePage> {
                 itemBuilder: (_, index) => index >= state.data.length
                     ? const BottomLoader()
                     : ListTile(
-                        onTap: () => _toDetailPressed(ctxDtl, state.data[index], stateDtl.articleEntity.id),
-                        selected: _selected(context, stateDtl.isInit, stateDtl.articleEntity.id, state.data[index].id),
+                        onTap: () => _toDetailPressed(ctxDtl, state.data[index], detail),
+                        selected: _selected(context, detail.isInit, detail, state.data[index].id),
                         leading: Text('${state.data[index].id}'),
                         title: Text(state.data[index].title),
                         subtitle: Text(state.data[index].body),
@@ -104,15 +103,17 @@ class _ArticlePageState extends State<ArticlePage> {
     );
   }
 
-  bool _selected(BuildContext context, bool isInit, int idDtl, int idData) =>
-      (context.isTabletUnder || isInit) ? false : idDtl == idData;
+  bool _selected(BuildContext context, bool isInit, ArticleDetailState detail, int idData) {  
+    return (context.isTabletUnder || isInit) ? false : detail.articleEntity.id == idData;
+  }
 
-  void _toDetailPressed(BuildContext ctxDtl, ArticleEntity data, int id) {
+  void _toDetailPressed(BuildContext ctxDtl, ArticleEntity data, ArticleDetailState detail) {
+    if (detail.typeForm.isEdit) return;
     if (ctxDtl.isTabletUnder) {
       ctxDtl.read<ArticleDetailCubit>().set(data, false);
       Get.to(ArticleDetailPage(articleEntity: data));
     } else {
-      if (id == data.id) {
+      if (detail.articleEntity.id == data.id) {
         ctxDtl.read<ArticleDetailCubit>().set(ArticleEntity.empty, true);
       } else {
         ctxDtl.read<ArticleDetailCubit>().set(data, false);
