@@ -1,8 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:solid_principle_app/domain/domain.dart';
-import 'package:solid_principle_app/hive_helper/hive_types.dart';
-import 'package:solid_principle_app/hive_helper/hive_adapters.dart';
-import 'package:solid_principle_app/hive_helper/fields/user_address_model_fields.dart';
+
+import '../../../helper/helper.dart';
 
 part 'user_address_model.g.dart';
 
