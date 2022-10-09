@@ -1,0 +1,14 @@
+name: solid_domain
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  solid_data:
+    path: ../solid_data
+  get_it: ^7.2.0

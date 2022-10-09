@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:solid_principle_app/core/themes/app_theme.dart';
 import 'package:solid_principle_app/injections.dart';
-import 'helper/helper.dart';
 import 'presentation/routes/routes.dart';
-import 'core/core.dart';
+import 'package:solid_data/solid_data.dart';
+import 'package:hive_flutter/adapters.dart';
 
 
 void mainCommon(FlavorConfig flavor) async {
@@ -19,9 +18,6 @@ void mainCommon(FlavorConfig flavor) async {
 
   // Hive Adapter Register
   registerAdapters();
-
-  //! WARNING: This line below will delete hive data
-  // await Hive.deleteBoxFromDisk(BOX_ARTICLE);
 
   runApp(const Apps());
 }

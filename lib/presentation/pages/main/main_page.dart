@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:solid_data/solid_data.dart';
 import 'package:solid_principle_app/core/core.dart';
 import 'package:solid_principle_app/injections.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

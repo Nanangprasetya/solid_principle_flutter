@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../core/core.dart';
-import '../../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
 import '../../../widgets/global/shimmer_custom.dart';
 
 class PhotoContentComponent extends StatelessWidget {

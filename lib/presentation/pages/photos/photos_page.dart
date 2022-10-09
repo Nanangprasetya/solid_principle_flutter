@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../core/core.dart';
-import '../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
 import '../../bloc/blocs.dart';
 import '../../widgets/widget.dart';
 import '../page.dart';

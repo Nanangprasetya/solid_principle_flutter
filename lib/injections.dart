@@ -1,10 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'presentation/bloc/blocs.dart';
-import 'core/config/flavor.dart';
-import 'data/data.dart';
-import 'domain/domain.dart';
-import 'service/service.dart';
+import 'package:solid_domain/solid_domain.dart';
+import 'package:solid_data/solid_data.dart';
 
 final sl = GetIt.instance;
 
@@ -27,34 +25,19 @@ Future<void> initLocator(FlavorConfig flavor) async {
   ///////////////
   //! Bloc / Cubit
   ///////////////
-  // Main Tab
+  // Main
   sl.registerFactory(() => MainCubit());
   // Article
-  sl.registerFactory(
-    () => ArticleCubit(
-      articleGetData: sl(),
-      networkInfo: sl(),
-    ),
-  );
+  sl.registerFactory(() => ArticleCubit(articleGetData: sl(), networkInfo: sl()));
   sl.registerFactory(() => ArticleDetailCubit());
   sl.registerFactory(() => ArticlePostCubit(sl()));
   sl.registerFactory(() => ArticlePutCubit(sl()));
   sl.registerFactory(() => ArticleDeleteCubit(sl()));
   // Photos
-  sl.registerFactory(
-    () => PhotosCubit(
-      photosGetData: sl(),
-      networkInfo: sl(),
-    ),
-  );
+  sl.registerFactory(() => PhotosCubit(photosGetData: sl(), networkInfo: sl()));
   sl.registerFactory(() => PhotosDetailCubit());
   // User
-  sl.registerFactory(
-    () => UserCubit(
-      userGetData: sl(),
-      networkInfo: sl(),
-    ),
-  );
+  sl.registerFactory(() => UserCubit(userGetData: sl(), networkInfo: sl()));
   sl.registerFactory(() => UserDetailCubit());
 
   ///////////////

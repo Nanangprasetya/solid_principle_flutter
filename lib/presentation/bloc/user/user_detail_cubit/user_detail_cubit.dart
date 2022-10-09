@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
 
 part 'user_detail_state.dart';
 

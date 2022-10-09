@@ -1,5 +1,5 @@
 import 'package:solid_principle_app/main.dart';
-import 'core/config/flavor.dart';
+import 'package:solid_data/solid_data.dart';
 
 void main() {
   mainCommon(

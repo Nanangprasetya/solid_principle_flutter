@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/core.dart';
-import '../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
 import '../../widgets/widget.dart';
 
 class UserDetailPage extends StatelessWidget {

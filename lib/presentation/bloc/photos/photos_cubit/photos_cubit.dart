@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../../core/core.dart';
-import '../../../../domain/domain.dart';
-import '../../../../service/service.dart';
+import 'package:solid_data/solid_data.dart';
+import 'package:solid_domain/solid_domain.dart';
 
 part 'photos_state.dart';
 

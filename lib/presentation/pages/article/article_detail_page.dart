@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:solid_principle_app/presentation/pages/page.dart';
 
 import '../../../core/core.dart';
-import '../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
 import '../../../injections.dart';
 import '../../bloc/blocs.dart';
 import '../../widgets/widget.dart';
