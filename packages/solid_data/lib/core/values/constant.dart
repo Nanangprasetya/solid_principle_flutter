@@ -30,11 +30,6 @@ const String EXCEPTION_NOT_FOUND = 'Not Found';
 const String EXCEPTION_ISE = 'Internal server error';
 const String EXCEPTION_WRONG = 'Something went wrong';
 
-// Success Input
-const String SUCCESS_POST = 'Successfull add data';
-const String SUCCESS_DELETE = 'Successfull delete data';
-const String SUCCESS_PUT = 'Successfull edit data';
-
 // Network Info
 const String MESSAGE_UNCONNECTED= 'No Internet';
 const String MESSAGE__CONNECTED = 'Connect to Internet';

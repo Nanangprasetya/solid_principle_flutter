@@ -1,6 +1,6 @@
-# solid_principle_app
+# Flutter with S.O.L.I.D Principle
 
-A new Flutter project.
+S.O.L.I.D principle adalah sebuah prinsip yang dikelankan oleh Robert J. Martin (a.k.a Uncle Bob) di dalam paper yang di terbitkannya pada tahun 2000 Design Principles and Design Patterns. Dalam 20 tahun terakhir kelima prinsip ini merevolusi dunia pemrograman berbasis object (OOP), merubah cara kita dalam menulis code. 
 
 ## Getting Started
 

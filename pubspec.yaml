@@ -27,6 +27,9 @@ dependencies:
   flutter_spinkit: ^5.1.0
   flutter_svg: ^1.1.5
   url_launcher: ^6.1.6
+  flutter_native_splash: ^2.2.9
+  flutter_flavorizr: ^2.1.4
+  flutter_launcher_icons: ^0.10.0
 
   solid_data:
     path: packages/solid_data
@@ -50,3 +53,39 @@ flutter:
   assets:
     - assets/json/
     - assets/images/
+    - assets/images/common/
+
+# For update your flavors
+# f pub run flutter_flavorizr -p <processor1>,<processor2>
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "app"
+    ios:
+  ide: "vscode"
+
+  flavors:
+    development:
+      app:
+        name: "[DEV] Solid App"
+
+      android:
+        applicationId: "com.biscuit.solid_principle_app"
+      ios:
+        bundleId: "com.biscuit.solid_principle_app"
+        # buildSettings:
+        #   # Development Team is visible in the apple developer portal 
+        #   DEVELOPMENT_TEAM: YOURDEVTEAMID 
+        #   PROVISIONING_PROFILE_SPECIFIER: "Dev-ProvisioningProfile"
+
+    production:
+      app:
+        name: "Solid App"
+
+      android:
+        applicationId: "com.example.solid_principle_app"
+      ios:
+        bundleId: "com.example.solid_principle_app"
+        # buildSettings:
+        #   DEVELOPMENT_TEAM: YOURPRODUCTIONTEAMID
+        #   PROVISIONING_PROFILE_SPECIFIER: "Production-ProvisioningProfile"

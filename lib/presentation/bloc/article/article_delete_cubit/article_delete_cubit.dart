@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:solid_data/solid_data.dart';
 import 'package:solid_domain/solid_domain.dart';
+import 'package:solid_principle_app/core/core.dart';
 
 part 'article_delete_state.dart';
 

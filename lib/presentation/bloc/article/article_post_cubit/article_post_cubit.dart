@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:solid_data/solid_data.dart';
 import 'package:solid_domain/solid_domain.dart';
+import 'package:solid_principle_app/core/core.dart';
 import 'package:solid_principle_app/presentation/models/models.dart';
 
 part 'article_post_state.dart';
