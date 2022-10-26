@@ -25,6 +25,7 @@ class TitleInput extends StatelessWidget {
                       ? ctxPut.read<ArticlePutCubit>().onTitleChanged(value)
                       : ctxPost.read<ArticlePostCubit>().onTitleChanged(value),
                   initialValue: detail.typeForm.isEdit ? detail.articleEntity.title : null,
+                  autofillHints: [AutofillHints.middleName],
                   title: 'Title',
                   hint: 'Enter Title',
                   multiline: true,

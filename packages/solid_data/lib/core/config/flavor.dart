@@ -1,5 +1,5 @@
 
-enum Env { DEV, STAGING, PRODUCTION }
+enum Env { DEVELOPMENT, STAGING, PRODUCTION }
 
 class FlavorConfig {
   final Env? env;
@@ -25,7 +25,7 @@ class FlavorConfig {
 
   static bool isProduction() => _instance!.env == Env.PRODUCTION;
 
-  static bool isDevelopment() => _instance!.env == Env.DEV;
+  static bool isDevelopment() => _instance!.env == Env.DEVELOPMENT;
 
   static bool isStaging() => _instance!.env == Env.STAGING;
 }

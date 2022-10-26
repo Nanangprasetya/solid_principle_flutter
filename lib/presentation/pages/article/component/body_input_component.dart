@@ -25,6 +25,7 @@ class BodyInput extends StatelessWidget {
                       ? ctxPut.read<ArticlePutCubit>().onBodyChanged(value)
                       : ctxPost.read<ArticlePostCubit>().onBodyChanged(value),
                   initialValue: detail.typeForm.isEdit ? detail.articleEntity.body : null,
+                  autofillHints: [AutofillHints.middleInitial],
                   title: 'Body',
                   hint: 'Enter Body',
                   multiline: true,

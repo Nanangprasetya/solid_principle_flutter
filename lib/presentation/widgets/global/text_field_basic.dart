@@ -18,6 +18,7 @@ class TextFieldBasic extends StatelessWidget {
   final int? maxLength;
   final String? errorText;
   final bool? autocorrect;
+  final Iterable<String>? autofillHints;
 
   const TextFieldBasic({
     Key? key,
@@ -37,6 +38,7 @@ class TextFieldBasic extends StatelessWidget {
     this.maxLength = 225,
     this.errorText,
     this.autocorrect = true,
+    this.autofillHints,
   }) : super(key: key);
 
   @override
@@ -46,6 +48,7 @@ class TextFieldBasic extends StatelessWidget {
         initialValue: initialValue,
         controller: controller,
         focusNode: focusNode,
+        autofillHints: autofillHints,
         keyboardType: inputType == null ? null : inputType,
         decoration: InputDecoration(
           border: OutlineInputBorder(

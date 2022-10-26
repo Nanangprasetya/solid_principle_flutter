@@ -30,6 +30,7 @@ dependencies:
   flutter_native_splash: ^2.2.9
   flutter_flavorizr: ^2.1.4
   flutter_launcher_icons: ^0.10.0
+  flutter_dotenv: ^5.0.2
 
   solid_data:
     path: packages/solid_data
@@ -54,6 +55,8 @@ flutter:
     - assets/json/
     - assets/images/
     - assets/images/common/
+    - .env.production
+    - .env.development
 
 # For update your flavors
 # f pub run flutter_flavorizr -p <processor1>,<processor2>

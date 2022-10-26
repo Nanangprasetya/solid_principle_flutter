@@ -1,16 +1,20 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:solid_data/solid_data.dart';
 import 'package:solid_principle_app/main.dart';
 
-void main() {
+Future<void> main() async {
+  // Load Env with flavor name
+  await dotenv.load(fileName: ".env.production");
+  
   mainCommon(FlavorConfig.init(
     env: Env.PRODUCTION,
     values: EnvValues(
       appVersion: '0.0.1',
-      baseApi: 'https://jsonplaceholder.typicode.com/',
+      baseApi: dotenv.env['BASE_API'],
       debug: true,
       delay: 0,
       printResponse: false,
-      urlGithub: 'https://github.com/Nanangprasetya/solid_principle_flutter/',
+      urlGithub: dotenv.env['URL_GITHUB'],
     ),
   ));
 }
