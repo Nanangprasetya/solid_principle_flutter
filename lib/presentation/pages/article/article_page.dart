@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../domain/domain.dart';
+import 'package:solid_domain/solid_domain.dart';
+
 import '../../widgets/widget.dart';
 import '../../../core/core.dart';
 import '../../bloc/blocs.dart';
@@ -27,6 +28,7 @@ class _ArticlePageState extends State<ArticlePage> {
   @override
   void initState() {
     super.initState();
+    
     _scrollController.addListener(() {
       if (_scrollController.infinityBottom()) context.read<ArticleCubit>().getAllData();
     });

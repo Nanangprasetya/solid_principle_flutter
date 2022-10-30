@@ -51,16 +51,18 @@ class ArticleFormPage extends StatelessWidget {
         ..onBodyChanged(detail.articleEntity.body),
       child: Padding(
         padding: EdgeInsets.all(AppDimens.marginPaddingMedium),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TitleInput(),
-            SizedBox(height: AppDimens.marginPaddingLarge),
-            BodyInput(),
-            SizedBox(height: AppDimens.marginPaddingLarge),
-            ButtonSubmitted(),
-          ],
+        child: AutofillGroup(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TitleInput(),
+              SizedBox(height: AppDimens.marginPaddingLarge),
+              BodyInput(),
+              SizedBox(height: AppDimens.marginPaddingLarge),
+              ButtonSubmitted(),
+            ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,13 @@
+# For this script please execute this command below
+# "f pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml"
+flutter_icons:
+  android: true
+  ios: true
+  adaptive_icon_background: "#F48024"
+  image_path: "assets/images/common/app_icon_launcher.png"
+  adaptive_icon_foreground: "assets/images/common/app_icon_adaptive.png"
+  web:
+    generate: true
+    image_path: "assets/images/common/app_icon_launcher.png"
+    background_color: "#F48024"
+    theme_color: "#F48024"

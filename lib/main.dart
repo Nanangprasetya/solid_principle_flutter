@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:solid_principle_app/core/themes/app_theme.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:solid_principle_app/injections.dart';
-import 'helper/helper.dart';
 import 'presentation/routes/routes.dart';
-import 'core/core.dart';
+import 'package:solid_data/solid_data.dart';
+import 'package:hive_flutter/adapters.dart';
 
 
 void mainCommon(FlavorConfig flavor) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // Keep native splash screen up until app is finished bootstrapping
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // injections
+  // injections locator
   initLocator(flavor);
 
   // Hive Init
@@ -20,14 +22,15 @@ void mainCommon(FlavorConfig flavor) async {
   // Hive Adapter Register
   registerAdapters();
 
-  //! WARNING: This line below will delete hive data
-  // await Hive.deleteBoxFromDisk(BOX_ARTICLE);
+  // Start App
+  runApp(const App());
 
-  runApp(const Apps());
+  // Remove splash screen when bootstrap is complete
+  FlutterNativeSplash.remove();
 }
 
-class Apps extends StatelessWidget {
-  const Apps({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

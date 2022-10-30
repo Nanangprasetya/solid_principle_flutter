@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:solid_principle_app/service/service.dart';
-import '../../../../core/core.dart';
-import '../../../../domain/domain.dart';
+import 'package:solid_data/solid_data.dart';
+import 'package:solid_domain/solid_domain.dart';
 
 part 'article_state.dart';
 
