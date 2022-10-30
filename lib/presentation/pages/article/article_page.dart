@@ -28,6 +28,7 @@ class _ArticlePageState extends State<ArticlePage> {
   @override
   void initState() {
     super.initState();
+    
     _scrollController.addListener(() {
       if (_scrollController.infinityBottom()) context.read<ArticleCubit>().getAllData();
     });

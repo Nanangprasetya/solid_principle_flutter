@@ -76,10 +76,6 @@ flavorizr:
         applicationId: "com.biscuit.solid_principle_app"
       ios:
         bundleId: "com.biscuit.solid_principle_app"
-        # buildSettings:
-        #   # Development Team is visible in the apple developer portal 
-        #   DEVELOPMENT_TEAM: YOURDEVTEAMID 
-        #   PROVISIONING_PROFILE_SPECIFIER: "Dev-ProvisioningProfile"
 
     production:
       app:
@@ -89,6 +85,3 @@ flavorizr:
         applicationId: "com.example.solid_principle_app"
       ios:
         bundleId: "com.example.solid_principle_app"
-        # buildSettings:
-        #   DEVELOPMENT_TEAM: YOURPRODUCTIONTEAMID
-        #   PROVISIONING_PROFILE_SPECIFIER: "Production-ProvisioningProfile"

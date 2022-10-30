@@ -27,7 +27,7 @@ class _PhotosPageState extends State<PhotosPage> {
   @override
   void initState() {
     super.initState();
-
+    
     _scrollController.addListener(() {
       if (_scrollController.infinityBottom()) context.read<PhotosCubit>().getAllData();
     });
