@@ -14,3 +14,14 @@ First register in your dependency on `pubspec.yaml`
   solid_data:
     path: ../solid_data
 ```
+
+## Folder Structure
+
+```bash
+├── lib
+│   └── src
+│       ├── entities
+│       ├── repositories
+│       └── usecases
+└── test
+```

@@ -1,6 +1,6 @@
 # Flutter App with S.O.L.I.D Principle
 
-S.O.L.I.D principle adalah sebuah prinsip yang dikelankan oleh Robert J. Martin (a.k.a Uncle Bob) di dalam paper yang di terbitkannya pada tahun 2000 Design Principles and Design Patterns. Dalam 20 tahun terakhir kelima prinsip ini merevolusi dunia pemrograman berbasis object (OOP), merubah cara kita dalam menulis code.
+SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin (also known as Uncle Bob).
 
 ## Documentation
 
@@ -52,9 +52,9 @@ flutter run --flavor production --target main_production.dart
 * Encryption environment API
 * C.R.U.D API
 * Continuous Integration using Codemagic
-* Genrator multiple Flavor
+* Generate multiple Flavor
 * Native splash screen
-* Image with Cache management
+* Network Image with Cache
 * Exception handle and Logger API
 * Unit and Widget Tests*
 

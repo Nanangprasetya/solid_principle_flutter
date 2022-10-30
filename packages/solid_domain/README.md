@@ -17,3 +17,22 @@ First register in your dependency on `pubspec.yaml`
   solid_domain:
     path: ../solid_domain
 ```
+
+## Folder Structure
+
+```bash
+├── lib
+│   ├── core
+│   │   ├── config
+│   │   ├── exception
+│   │   ├── failure
+│   │   ├── usecase
+│   │   └── values
+│   ├── helper
+│   ├── service
+│   └── src
+│       ├── datasource
+│       ├── models
+│       └── repositories
+└── test
+```
